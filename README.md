@@ -22,7 +22,7 @@ A basic example looks like::
     SERVER_LOG="path of your log"
     BOTROOT="bot directory"
 
-    # ask to klaus@rkf-clan.org or visit http://rkf-clan.org
+    # ask to klaus@rkf-clan.org or visit http://rkf-clan.org for all API_* parematers
     API_URL="api url"
     API_USER="api user"
     API_KEY="api key"
