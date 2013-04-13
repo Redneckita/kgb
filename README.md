@@ -44,7 +44,7 @@ A basic example looks like::
     done
 
 For all API_* parameters you need to ask to klaus@rkf-clan.org or visit http://rkf-clan.org. 
-You can have only one kgb installation and multiple run_bot.sh in separated folders for run kgb on multiple server of same machine.
+You can have only one kgb installation and multiple run_bot.sh in separated folders for run kgb on multiple server of same machine. Of course you'll need different API_* parameters for every server.
 
 
 What's new
