@@ -44,3 +44,5 @@ A basic example looks like::
 
       echo "$(date): Klaus BOT restarted." >> ./kgb_bot.log
     done
+
+For all API_* parameters you need to ask to klaus@rkf-clan.org or visit http://rkf-clan.org. 
