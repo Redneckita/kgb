@@ -30,7 +30,6 @@ class Main:
             params.print_help()
             exit(-1) 
         else:
-            print "|" + opts.rcon_passwd.decode("base64", "strict") + "|"
             log_parser = parser.Parser(opts.server_log)
             evaluator = parser.Evaluator(opts.server_address, int(opts.server_port), opts.rcon_passwd.decode("base64", "strict"), opts.api_url, opts.api_user, opts.api_key, opts.api_user_resource_uri, opts.api_server_resource_uri)
             while 1:
