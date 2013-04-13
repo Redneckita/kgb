@@ -11,11 +11,11 @@ class Main:
         params.add_option('-p', '--server_port', help='Server port', dest='server_port')
         params.add_option('-l', '--server_log', help='Server log path', dest='server_log')
         params.add_option('-r', '--rcon_passwd', help='Rcon password encoded base64', dest='rcon_passwd')
-        params.add_option('-u', '--api_url', help='url for json api, ask to klaus@rkf-klan.org', dest='api_url')
-        params.add_option('-a', '--api_user', help='user for json api, ask to klaus@rkf-klan.org', dest='api_user')
-        params.add_option('-k', '--api_key', help='key for json api, ask to klaus@rkf-klan.org', dest='api_key')
-        params.add_option('-e', '--api_user_resource', help='resource for api user, ask to klaus@rkf-klan.org', dest='api_user_resource_uri')
-        params.add_option('-f', '--api_server_resource', help='resource for api server, ask to klaus@rkf-klan.org', dest='api_server_resource_uri')
+        params.add_option('-al', '--api_url', help='url for json api, ask to klaus@rkf-klan.org', dest='api_url')
+        params.add_option('-au', '--api_user', help='user for json api, ask to klaus@rkf-klan.org', dest='api_user')
+        params.add_option('-ak', '--api_key', help='key for json api, ask to klaus@rkf-klan.org', dest='api_key')
+        params.add_option('-aur', '--api_user_resource', help='resource for api user, ask to klaus@rkf-klan.org', dest='api_user_resource_uri')
+        params.add_option('-asr', '--api_server_resource', help='resource for api server, ask to klaus@rkf-klan.org', dest='api_server_resource_uri')
 
 
         (opts, args) = params.parse_args()
