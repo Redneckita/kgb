@@ -16,19 +16,18 @@ A basic example looks like::
     # yourfolder/run_bot.sh
     # ============
     #!/bin/bash
-    SERVER_ADDRESS="xxx.xxx.xxx.xxx"
-    SERVER_PORT=27960
-    SERVER_RCON_PASSWD=$(echo -n "youpassword"|base64)
+    SERVER_ADDRESS="your server ip"
+    SERVER_PORT=your server port
+    SERVER_RCON_PASSWD=$(echo -n "your rcon password"|base64)
     SERVER_LOG="path of your log"
     BOTROOT="bot directory"
 
+    # ask to klaus@rkf-clan.org or visit http://rkf-clan.org
     API_URL="api url"
     API_USER="api user"
     API_KEY="api key"
     API_USER_RESOURCE_URI="api resource for user"
     API_SERVER_RESOURCE_URI="api resource for server"
-
-
 
     while true
     do
