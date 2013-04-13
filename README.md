@@ -13,27 +13,35 @@ How to run KGB
 
 A basic example looks like::
 
-    # myapp/api.py
+    # yourfolder/run_bot.sh
     # ============
-    from tastypie.resources import ModelResource
-    from myapp.models import Entry
+    #!/bin/bash
+    SERVER_ADDRESS="xxx.xxx.xxx.xxx"
+    SERVER_PORT=27960
+    SERVER_RCON_PASSWD=$(echo -n "youpassword"|base64)
+    SERVER_LOG="path of your log"
+    BOTROOT="bot directory"
+
+    API_URL="api url"
+    API_USER="api user"
+    API_KEY="api key"
+    API_USER_RESOURCE_URI="api resource for user"
+    API_SERVER_RESOURCE_URI="api resource for server"
 
 
-    class EntryResource(ModelResource):
-        class Meta:
-            queryset = Entry.objects.all()
 
+    while true
+    do
+      echo -n "Starting Klaus BOT in 3 seconds..."
+      echo ""
+      echo ""
+      echo "    /\___/\\"
+      echo "    \ -.- /"
+      echo "    \`-.^.-'"
+      echo "      /\"\\"
+      echo ""
+      sleep 3
+      python2.7 $BOTROOT/main.py -s $SERVER_ADDRESS -p $SERVER_PORT -r $SERVER_RCON_PASSWD -l $SERVER_LOG -u $API_URL -a $API_USER -k $API_KEY -e $API_USER_RESOURCE_URI -f $API_SERVER_RESOURCE_URI
 
-    # urls.py
-    # =======
-    from django.conf.urls.defaults import *
-    from tastypie.api import Api
-    from myapp.api import EntryResource
-
-    v1_api = Api(api_name='v1')
-    v1_api.register(EntryResource())
-
-    urlpatterns = patterns('',
-        # The normal jazz here then...
-        (r'^api/', include(v1_api.urls)),
-    )
+      echo "$(date): Klaus BOT restarted." >> ./kgb_bot.log
+    done
