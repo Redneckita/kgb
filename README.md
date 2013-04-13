@@ -48,4 +48,4 @@ For all API_* parameters you need to ask to klaus@rkf-clan.org or visit http://r
 
 What's new
 ====================
-The new KGB doesn't have a local database but communicates with RESTFUL API of the WebSite http://kgb-test.rkf-clan.org/. Clan Admins can go in administration area of WebSite and they can view (or change) all data recorded by kgb.
+The new KGB doesn't have a local database but communicates with RESTFUL API of the WebSite http://kgb-test.rkf-clan.org/. Clan Admins can go in administration area of WebSite and they can view (or change) all data recorded by kgb. Tehy'll can be able to add admin, ban player, add alias and other useful stuff.
