@@ -1,10 +1,3 @@
-API_URL = 'http://kgb-test.rkf-clan.org/api/v1/'
-API_USER = 'rkf_test'
-API_KEY = '64738'
-API_USER_RESOURCE_URI = '/api/v1/user/3/'
-API_SERVER_RESOURCE_URI = '/api/v1/server/2/'
-
-
 BOT_NAME = "Klaus BOT"
 BOT_VERSION = "0.8"
 BOT_PREFIX = "^0[^1KGB^0] "

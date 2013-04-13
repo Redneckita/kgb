@@ -28,12 +28,18 @@ class Parser:
 
 class Evaluator:
 
-    def __init__(self, host_address, host_port, rcon_passwd):
+    def __init__(self, host_address, host_port, rcon_passwd, api_url , api_user, api_key, api_user_resource_uri, api_server_resource_uri):
         self.host_address = host_address
         self.host_port = host_port
         self.rcon_passwd = rcon_passwd
         self.rc = rcon.Rcon(self.host_address, self.host_port, self.rcon_passwd)
-        self.api = api.Api(settings.API_USER, settings.API_KEY, settings.API_URL, settings.API_SERVER_RESOURCE_URI, settings.API_USER_RESOURCE_URI)
+
+        self.api_url = api_url
+        self.api_user = api_user
+        self.api_key = api_key
+        self.api_user_resource_uri = api_user_resource_uri
+        self.api_server_resource_uri = api_server_resource_uri
+        self.api = api.Api(api_user, api_key, api_url, api_server_resource_uri, api_user_resource_uri)
 
     def evaluate_player(self, data):            
 
@@ -107,4 +113,6 @@ class Evaluator:
                             getattr(self.rc, command_prop['function'])(player, message, player_obj)
                         else:
                             self.rc.putMessage(player.slot, 'Need permission, minimum level is %s' % (command_prop['min_level']))
+                    else:
+                        print 'no player'
             
