@@ -51,4 +51,4 @@ What's new
 ====================
 The new KGB doesn't have a local database but communicates with RESTFUL API of the WebSite http://kgb-test.rkf-clan.org/. Clan Admins can go in administration area of WebSite and they can view (or change) all data recorded by kgb. They'll can be able to add admin, ban player, add alias and other useful stuff.
 
-KGB WebSite have a shared page where you can view permanent ban (with demo) of all clans that use kgb.
+KGB WebSite have a shared page where you can view permanent ban (with demo, reason and banner) of all clans that use kgb.
