@@ -1,35 +1,50 @@
-KGB
-===
+K.G.B.
+======
 
-KGB (Klaus Game Bot) is a remake of first kgb (https://code.google.com/p/k-g-b/) and he is a bot written in python 2.7 that aims to be flexible, stable and performant game bot for Urban Terror. Skills, ratios and other 'statistical' features are voluntarily excluded from the developing in order to focus on performance and flexibility.
+Klaus Game Bot (which its acronym is K.G.B.) is a rework of the first bot (https://code.google.com/p/k-g-b/) written in python 2.7 that aims to be a flexible, stable and performant game bot for Urban Terror 4.x servers. Skills, ratios and other 'statistical' features are voluntarily excluded from the developing in order to keep focus on performance and flexibility.
 
-KGB is ideal for a server that hosts multiple game instances because updates are managed by the server so that gameservers' admins don't need to worry about them. Their bot is always up-to-date and always get the latest bug fixes...
+K.G.B. is the ideal solution for a server that hosts multiple game instances because updates are managed centrally so that gameservers' admins don't need to worry about them. Their bot is always up-to-date and always get the latest bug fixes...
 
 
-How to run KGB
+How to run K.G.B.
 ====================
 
-A basic example looks like::
+All the configuration parameters are kept within a single unix shell-script file, compiling that part is in charge of clan admins or game servers administrator.
 
-    # yourfolder/run_bot.sh
-    # ============
+A basic example looks like the following script:
+
     #!/bin/bash
-    SERVER_ADDRESS="your server ip"
-    SERVER_PORT=your server port
-    SERVER_RCON_PASSWD=$(echo -n "your rcon password"|base64)
-    SERVER_LOG="path of your log"
-    BOTROOT="bot directory"
+    # ============
+    # yourfolder/run_bot.sh
+    SERVER_ADDRESS="Your server IP"
+    # i.e. SERVER_ADDRESS="1.2.3.4"
+    
+    SERVER_PORT="Your server port"
+    # i.e. SERVER_PORT="27960"
+    
+    SERVER_RCON_PASSWD="$(echo -n 'Your RCON password'|base64)"
+    # i.e. SERVER_RCON_PASSWD="$(echo -n 'myl33trc0np4ssw0rd'|base64)"
+   
+    SERVER_LOG="Your server logfile absolute path"
+    # i.e. SERVER_LOG="/opt/urbanterror41/.q3a/q3ut4/myurtserver.log"
+    # (look for "seta g_log" line in server.cfg)
+   
+    BOTROOT="Main K.G.B. installation path"
+    # i.e. BOTROOT="/opt/KlausGameBot"
 
-    # ask to klaus@rkf-clan.org or visit http://rkf-clan.org for all API_* parematers
-    API_URL="api url"
-    API_USER="api user"
-    API_KEY="api key"
-    API_USER_RESOURCE_URI="api resource for user"
-    API_SERVER_RESOURCE_URI="api resource for server"
+    BOTLOGFILE="Game instance bot logfile"
+    # i.e. BOTLOGFILE="./kgb_bot.log"
+
+    # API parameters... ask klaus@rkf-clan.org or visit http://rkf-clan.org
+    API_URL="API URL"
+    API_USER="API User"
+    API_KEY="API Key"
+    API_USER_RESOURCE_URI="API resource for User"
+    API_SERVER_RESOURCE_URI="API resource for Server"
 
     while true
     do
-      echo -n "Starting Klaus BOT in 3 seconds..."
+      echo -n "Starting Klaus Game Bot in 3 seconds..."
       echo ""
       echo ""
       echo "    /\___/\\"
@@ -38,17 +53,27 @@ A basic example looks like::
       echo "      /\"\\"
       echo ""
       sleep 3
-      python2.7 $BOTROOT/main.py -s $SERVER_ADDRESS -p $SERVER_PORT -r $SERVER_RCON_PASSWD -l $SERVER_LOG -u $API_URL -a $API_USER -k $API_KEY -e $API_USER_RESOURCE_URI -f $API_SERVER_RESOURCE_URI
+      python2.7 $BOTROOT/main.py \
+        -s "$SERVER_ADDRESS" \
+        -p "$SERVER_PORT" \
+        -r "$SERVER_RCON_PASSWD" \
+        -l "$SERVER_LOG" \
+        -u "$API_URL" \
+        -a "$API_USER" \
+        -k "$API_KEY" \
+        -e "$API_USER_RESOURCE_URI" \
+        -f "$API_SERVER_RESOURCE_URI"
 
-      echo "$(date): Klaus BOT restarted." >> ./kgb_bot.log
+      echo "$(date): Klaus Game Bot restarted." >> $BOTLOGFILE
     done
 
-For all API_* parameters you need to ask to klaus@rkf-clan.org or visit http://rkf-clan.org. 
-You can have only one kgb installation and multiple run_bot.sh in separated folders for run kgb on multiple server on same machine. Of course, you'll need different API_* parameters for every server.
+You may ask to klaus@rkf-clan.org or visit http://rkf-clan.org for all API_* parameters. 
+K.G.B. is meant to be installed in one place, pointed by the environment variable BOTROOT, and have multiple 'run_bot.sh' scripts in separated folders allowing system administrators to manage multiple game servers with ease. Of course, you'll need unique API_* parameters for each server.
 
 
 What's new
 ====================
-The new KGB doesn't have a local database but communicates with RESTFUL API of the WebSite http://kgb-test.rkf-clan.org/. Clan Admins can go in administration area of WebSite and they can view (or change) all data recorded by kgb. They'll can be able to add admin, ban player, add alias and other useful stuff.
+The new K.G.B. doesn't rely on a local database but communicates via RESTFUL APIs with the WebSite http://kgb-test.rkf-clan.org/.
+Clan Admins can manage evey aspect of their instance via the administration panel of the WebSite. They will be able to add/remove admins, ban/unban players, add/remove aliases and many other useful stuff.
 
-KGB WebSite have a shared page where you can view permanent ban (with demo, reason and banner) of all clans that use kgb.
+Via K.G.B. WebSite you can access a publicly shared page where you can view permanent bans (with demo, reason and banner) of all clans that use the bot.
