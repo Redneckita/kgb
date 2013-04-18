@@ -141,6 +141,7 @@ class Rcon:
         print command
         if command[1] in ['on', 'off']:
             # comando ok
+            print 'eseguo comando'
         else:
             self.putMessage(admin.slot, 'bad syntax')    
             self.help(args[0], args[1], args[2])
