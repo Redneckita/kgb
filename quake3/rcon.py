@@ -140,8 +140,8 @@ class Rcon:
         command = command.split()
         print command
         if len(command) == 2 and command[1] in ['on', 'off']:
-                # comando ok
-                print 'eseguo comando'
-            else:
-                self.putMessage(admin.slot, 'bad syntax')    
+            # comando ok
+            print 'eseguo comando'
+        else:
+            self.putMessage(admin.slot, 'bad syntax')    
         
