@@ -65,4 +65,11 @@ COMMANDS = {
         "syntax": "syntax is !!mute <playername|id>",
         "function": "mute"
     },                
+    "aych": {
+        "command": "!!aych",
+        "command_slug": "!!y",
+        "min_level": 100,
+        "syntax": "syntax is !!aych <on|off>",
+        "function": "aych"
+    },     
 }

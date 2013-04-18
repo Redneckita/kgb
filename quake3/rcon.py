@@ -131,3 +131,12 @@ class Rcon:
             self.putCommand('mute %d' % player_slot)
         else:
             print 'player non trovato o troppi player con questo nome|id'                         
+
+    def aych(self, *args, **kwargs):
+        
+        admin = args[0]
+        command = args[1]
+        print 'admin is %s and command is %s' % (admin.name, command)
+        command = command.split()
+        print command
+        
