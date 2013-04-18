@@ -144,5 +144,5 @@ class Rcon:
             print 'eseguo comando'
         else:
             self.putMessage(admin.slot, 'bad syntax')    
-            self.help(args[0], args[1], args[2])
+            self.help(*args, **kwargs)
         
