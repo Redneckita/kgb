@@ -139,7 +139,7 @@ class Rcon:
         print 'admin is %s and command is %s' % (admin.name, command)
         command = command.split()
         print command
-        if command[1] in ['on', 'off']:
+        if command[1] and command[1] in ['on', 'off']:
             # comando ok
             print 'eseguo comando'
         else:
