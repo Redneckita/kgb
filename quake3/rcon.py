@@ -139,10 +139,11 @@ class Rcon:
         print 'admin is %s and command is %s' % (admin.name, command)
         command = command.split()
         print command
-        if command[1] is not None and command[1] in ['on', 'off']:
-            # comando ok
-            print 'eseguo comando'
-        else:
-            self.putMessage(admin.slot, 'bad syntax')    
-            self.help(*args, **kwargs)
+        if command[1] is not None:
+            if command[1] in ['on', 'off']:
+                # comando ok
+                print 'eseguo comando'
+            else:
+                self.putMessage(admin.slot, 'bad syntax')    
+                self.help(*args, **kwargs)
         
