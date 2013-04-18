@@ -19,7 +19,7 @@ class Api:
         c.setopt(pycurl.URL, self.api_url + 'player/?guid=%s' % guid)
         c.setopt(pycurl.HTTPHEADER, self.headers)
         c.setopt(pycurl.WRITEFUNCTION, buf.write)
-        c.perform()
+        print c.perform()
         players = json.loads(buf.getvalue())
         buf.close()
         if c.getinfo(pycurl.HTTP_CODE)==200:
