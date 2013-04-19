@@ -51,16 +51,12 @@ class Rcon:
             a.rcon_command('say "%s%s%s"' % (settings.BOT_PREFIX, settings.BOT_MESSAGES_COLOR_PREFIX, data))
 
     def version(self, *args, **kwargs):
-        self.putMessage(None, "This is ^1%s ^7version ^5%s" % (settings.BOT_NAME, settings.BOT_VERSION))
+        self.putMessage(None, settings.MESSAGE_VERSION)
 
     def help(self, *args, **kwargs):
         admin = args[0]
         data = args[1]
         admin_obj = args[2]
-
-        print admin
-        print data
-        print admin_obj
 
         print 'admin is %s and command is %s' % (admin.name, data)
         received_command = []
@@ -167,7 +163,10 @@ class Rcon:
         if len(command) == 2 and command[1] in ['on', 'off']:
             # comando ok
             print 'eseguo comando'
-            
+            if command[1] == 'on':
+                print 'on attivo'
+            else:
+                print 'off disattivo'
         else:
             help_command = '!!help %s' % command[0].replace('!!', '')
             self.help(args[0], help_command, args[2])
