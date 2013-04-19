@@ -58,8 +58,10 @@ class Evaluator:
                     player_found, player_obj = self.api.insert_player(player)    
                     if player_found:
                         # 'player inserito'
+                        pass
                     else:
                         # 'errore: player non inserito'
+                        pass
                 
                 if player_found:
                     # 'player esiste, verifico se inserire alias'
@@ -69,8 +71,10 @@ class Evaluator:
                         alias_found, alias_obj = self.api.insert_alias(player, player_obj['resource_uri'])
                         if alias_found:
                             # 'alias inserito'
+                            pass
                     else:
                         # 'alias esiste'
+                        pass
 
 
                     # 'player esiste, verifico se inserire profile'
@@ -80,8 +84,10 @@ class Evaluator:
                         profile_found, profile_obj = self.api.insert_profile(player, player_obj['resource_uri'])
                         if profile_found:
                             # 'profile inserito'
+                            pass
                     else:
                         # 'profile esiste'
+                        pass
 
     def evaluate_command(self, x):
 
@@ -115,4 +121,5 @@ class Evaluator:
                             self.rc.putMessage(player.slot, settings.MESSAGE_PERMISSION % (command_prop['min_level']))
                     else:
                         # 'no player'
+                        pass
             
