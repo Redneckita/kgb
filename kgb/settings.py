@@ -8,14 +8,7 @@ MESSAGE_VERSION = "This is ^1%s ^7version ^5%s" % (BOT_NAME, BOT_VERSION)
 MESSAGE_PERMISSION = "Permission required, minimum level is %s"
 
 SPAM_MESSAGES_TIMEOUT = 180
-<<<<<<< HEAD
 SPAM_MESSAGES = {}
-=======
-SPAM_MESSAGES = {
-}
-
-
->>>>>>> a44b0cfead1d53f9704bee95c8ee73333be82ad6
 
 REPLACE_STRINGS = [
     ("^1","")
