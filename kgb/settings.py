@@ -2,13 +2,12 @@ BOT_NAME = "Klaus BOT"
 BOT_VERSION = "0.8"
 BOT_PREFIX = "^0[^1KGB^0] "
 BOT_MESSAGES_COLOR_PREFIX = "^7"
+
 MESSAGE_VERSION = "This is ^1%s ^7version ^5%s" % (BOT_NAME, BOT_VERSION)
+MESSAGE_PERMISSION = "Permission required, minimum level is %s"
 
 SPAM_MESSAGES_TIMEOUT = 180
-SPAM_MESSAGES = {
-}
-
-
+SPAM_MESSAGES = {}
 
 REPLACE_STRINGS = [
     ("^1","")

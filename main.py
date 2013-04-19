@@ -25,7 +25,7 @@ class Main:
             or opts.api_url is None or opts.api_user is None \
             or opts.api_key is None or opts.api_user_resource_uri is None \
             or opts.api_server_resource_uri is None:
-            print "A mandatory option is missing\n"
+            # "A mandatory option is missing\n"
 
             params.print_help()
             exit(-1) 

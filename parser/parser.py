@@ -54,34 +54,34 @@ class Evaluator:
             if player and player.guid != '':
                 player_found, player_obj = self.api.get_player(player.guid)
                 if not player_found:
-                    print 'player non trovato, lo inserisco'
+                    # 'player non trovato, lo inserisco'
                     player_found, player_obj = self.api.insert_player(player)    
                     if player_found:
-                        print 'player inserito'
+                        # 'player inserito'
                     else:
-                        print 'errore: player non inserito'
+                        # 'errore: player non inserito'
                 
                 if player_found:
-                    print 'player esiste, verifico se inserire alias'
+                    # 'player esiste, verifico se inserire alias'
                     alias_found, alias_obj = self.api.get_alias(player.guid, player.name)
                     if not alias_found:
-                        print 'alias non trovato, lo inserisco'
+                        # 'alias non trovato, lo inserisco'
                         alias_found, alias_obj = self.api.insert_alias(player, player_obj['resource_uri'])
                         if alias_found:
-                            print 'alias inserito'
+                            # 'alias inserito'
                     else:
-                        print 'alias esiste'
+                        # 'alias esiste'
 
 
-                    print 'player esiste, verifico se inserire profile'
+                    # 'player esiste, verifico se inserire profile'
                     profile_found, profile_obj = self.api.get_profile(player.guid, player.address.split(":")[0])
                     if not profile_found:
-                        print 'profile non trovato, lo inserisco'
+                        # 'profile non trovato, lo inserisco'
                         profile_found, profile_obj = self.api.insert_profile(player, player_obj['resource_uri'])
                         if profile_found:
-                            print 'profile inserito'
+                            # 'profile inserito'
                     else:
-                        print 'profile esiste'
+                        # 'profile esiste'
 
     def evaluate_command(self, x):
 
@@ -94,12 +94,12 @@ class Evaluator:
             message = res.group("text")
             say = res.group("say")
 
-            print '\n'
-            print 'verifico se mi e\' stato passato un comando'
+            # '\n'
+            # 'verifico se mi e\' stato passato un comando'
             data = message.split()
             for command, command_prop in settings.COMMANDS.items():
                 if data[0] == command_prop['command'] or data[0] == command_prop['command_slug']:
-                    print 'e\' un comando, verifico se il player ha i permessi'
+                    # 'e\' un comando, verifico se il player ha i permessi'
                     player = self.rc.getPlayer(res.group("id"))
                     is_authorized = False
                     if player and player.guid != '':
@@ -109,10 +109,10 @@ class Evaluator:
                                 is_authorized = True
 
                         if is_authorized:
-                            print 'e\' autorizzato ... perform command'
+                            # 'e\' autorizzato ... perform command'
                             getattr(self.rc, command_prop['function'])(player, message, player_obj)
                         else:
-                            self.rc.putMessage(player.slot, 'Need permission, minimum level is %s' % (command_prop['min_level']))
+                            self.rc.putMessage(player.slot, settings.MESSAGE_PERMISSION % (command_prop['min_level']))
                     else:
-                        print 'no player'
+                        # 'no player'
             
