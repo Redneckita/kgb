@@ -57,6 +57,11 @@ class Rcon:
         admin = args[0]
         data = args[1]
         admin_obj = args[2]
+
+        print admin
+        print data
+        print admin_obj
+
         print 'admin is %s and command is %s' % (admin.name, data)
         received_command = []
         received_command = data.split()
@@ -65,7 +70,7 @@ class Rcon:
             if len(received_command) == 1:
                 self.putMessage(admin.slot, '%s (%s) for level %s. %s' % (command_prop['command'], command_prop['command_slug'], command_prop['min_level'], command_prop['syntax']))
             elif len(received_command) == 2:
-                if received_command[1] == command or received_command[1] == command:
+                if received_command[1] == command or received_command[1] == command_prop['command'].replace('!!', '') or received_command[1] == command_prop['command_slug'].replace('!!', ''):
                     self.putMessage(admin.slot, '%s (%s) for level %s. %s' % (command_prop['command'], command_prop['command_slug'], command_prop['min_level'], command_prop['syntax']))
 
             time.sleep(1)
@@ -85,7 +90,8 @@ class Rcon:
             else:
                 print 'player non trovato o troppi player con questo nome|id'                
         else:
-            self.putMessage(admin.slot, 'bad syntax')                             
+            help_command = '!!help %s' % command[0].replace('!!', '')
+            self.help(args[0], help_command, args[2])
 
     def slap(self, *args, **kwargs):
         
@@ -100,7 +106,8 @@ class Rcon:
             else:
                 print 'player non trovato o troppi player con questo nome|id'  
         else:
-            self.putMessage(admin.slot, 'bad syntax')             
+            help_command = '!!help %s' % command[0].replace('!!', '')
+            self.help(args[0], help_command, args[2])
 
     def kick(self, *args, **kwargs):
         
@@ -115,7 +122,8 @@ class Rcon:
             else:
                 print 'player non trovato o troppi player con questo nome|id'  
         else:
-            self.putMessage(admin.slot, 'bad syntax')                 
+            help_command = '!!help %s' % command[0].replace('!!', '')
+            self.help(args[0], help_command, args[2])
 
     def nuke(self, *args, **kwargs):
         
@@ -130,7 +138,8 @@ class Rcon:
             else:
                 print 'player non trovato o troppi player con questo nome|id'   
         else:
-            self.putMessage(admin.slot, 'bad syntax') 
+            help_command = '!!help %s' % command[0].replace('!!', '')
+            self.help(args[0], help_command, args[2])
 
     def mute(self, *args, **kwargs):
         
@@ -145,7 +154,8 @@ class Rcon:
             else:
                 print 'player non trovato o troppi player con questo nome|id'                         
         else:
-            self.putMessage(admin.slot, 'bad syntax') 
+            help_command = '!!help %s' % command[0].replace('!!', '')
+            self.help(args[0], help_command, args[2])
 
     def aych(self, *args, **kwargs):
         
@@ -157,7 +167,8 @@ class Rcon:
         if len(command) == 2 and command[1] in ['on', 'off']:
             # comando ok
             print 'eseguo comando'
+            
         else:
-            self.putMessage(admin.slot, 'bad syntax') 
-            self.help(args[0], '!!h %s', args[2]) % command[1].replace('!!', '')
-        
+            help_command = '!!help %s' % command[0].replace('!!', '')
+            self.help(args[0], help_command, args[2])
+    
