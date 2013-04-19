@@ -19,7 +19,7 @@ class Api:
         c.setopt(pycurl.URL, self.api_url + 'player/?guid=%s' % guid)
         c.setopt(pycurl.HTTPHEADER, self.headers)
         c.setopt(pycurl.WRITEFUNCTION, buf.write)
-        print c.perform()
+        c.perform()
         players = json.loads(buf.getvalue())
         buf.close()
         if c.getinfo(pycurl.HTTP_CODE)==200:
@@ -62,7 +62,7 @@ class Api:
         if c.getinfo(pycurl.HTTP_CODE)==200:
             if aliases['meta']['total_count'] == 0:
                 return False, None
-            elif aliases['meta']['total_count'] == 1:
+            elif aliases['meta']['total_count'] >= 1:
                 return True, aliases['objects'][0]
             else:
                 return False, None
