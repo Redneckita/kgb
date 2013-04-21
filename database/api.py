@@ -65,7 +65,7 @@ class Api:
             elif aliases['meta']['total_count'] == 1:
                 return True, aliases['objects'][0]
             else:
-                return False, None
+                return True, None
         return True, None
 
     def insert_alias(self, player, player_uri):
@@ -104,7 +104,7 @@ class Api:
             elif profiles['meta']['total_count'] == 1:
                 return True, profiles['objects'][0]
             else:
-                return False, None
+                return True, None
         return True, None
 
     def insert_profile(self, player, player_uri):

@@ -64,9 +64,10 @@ class Evaluator:
                         pass
                 
                 if player_found:
+
                     # 'player esiste, verifico se inserire alias'
                     alias_found, alias_obj = self.api.get_alias(player.guid, player.name)
-                    if not alias_found:
+                    if alias_found is not None and not alias_found:
                         # 'alias non trovato, lo inserisco'
                         alias_found, alias_obj = self.api.insert_alias(player, player_obj['resource_uri'])
                         if alias_found:
@@ -79,7 +80,7 @@ class Evaluator:
 
                     # 'player esiste, verifico se inserire profile'
                     profile_found, profile_obj = self.api.get_profile(player.guid, player.address.split(":")[0])
-                    if not profile_found:
+                    if profile_found is not None and not profile_found:
                         # 'profile non trovato, lo inserisco'
                         profile_found, profile_obj = self.api.insert_profile(player, player_obj['resource_uri'])
                         if profile_found:
