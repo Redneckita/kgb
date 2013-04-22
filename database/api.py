@@ -25,12 +25,12 @@ class Api:
         buf.close()
         if c.getinfo(pycurl.HTTP_CODE)==200:
             if players['meta']['total_count'] == 0:
-                return False, None#, None
+                return False, None
             elif players['meta']['total_count'] == 1:
-                return True, players['objects'][0]#, players['objects'][0]['resource_uri']
+                return True, players['objects'][0]
             else:
-                return False, None#, None
-        return False, None#, None
+                return False, None
+        return False, None
 
     def insert_player(self, player):
 
@@ -67,8 +67,8 @@ class Api:
             elif aliases['meta']['total_count'] == 1:
                 return True, aliases['objects'][0]
             else:
-                return False, None
-        return False, None
+                return True, None
+        return True, None
 
     def insert_alias(self, player, player_uri):
 
@@ -107,8 +107,8 @@ class Api:
             elif profiles['meta']['total_count'] == 1:
                 return True, profiles['objects'][0]
             else:
-                return False, None
-        return False, None
+                return True, None
+        return True, None
 
     def insert_profile(self, player, player_uri):
 
