@@ -1,4 +1,4 @@
-import pycurl, json, cStringIO
+import pycurl, json, cStringIO, urllib
 
 class Api:
 
@@ -16,7 +16,8 @@ class Api:
 
         buf = cStringIO.StringIO()
         c = pycurl.Curl()
-        c.setopt(pycurl.URL, self.api_url + 'player/?guid=%s' % guid)
+        parameters = {'guid': guid}
+        c.setopt(pycurl.URL, self.api_url + 'player/?' + urllib.urlencode(parameters))
         c.setopt(pycurl.HTTPHEADER, self.headers)
         c.setopt(pycurl.WRITEFUNCTION, buf.write)
         c.perform()
@@ -53,7 +54,8 @@ class Api:
 
         buf = cStringIO.StringIO()
         c = pycurl.Curl()
-        c.setopt(pycurl.URL, self.api_url + 'alias/?player__guid=%s&alias=%s' % (guid, name))
+        parameters = {'player__guid': guid, 'alias': name}
+        c.setopt(pycurl.URL, self.api_url + 'alias/?' + urllib.urlencode(parameters))
         c.setopt(pycurl.HTTPHEADER, self.headers)
         c.setopt(pycurl.WRITEFUNCTION, buf.write)
         c.perform()
@@ -65,8 +67,8 @@ class Api:
             elif aliases['meta']['total_count'] == 1:
                 return True, aliases['objects'][0]
             else:
-                return True, None
-        return True, None
+                return False, None
+        return False, None
 
     def insert_alias(self, player, player_uri):
 
@@ -92,7 +94,8 @@ class Api:
 
         buf = cStringIO.StringIO()
         c = pycurl.Curl()
-        c.setopt(pycurl.URL, self.api_url + 'profile/?player__guid=%s&ip=%s' % (guid, ip))
+        parameters = {'player__guid': guid, 'ip': ip}
+        c.setopt(pycurl.URL, self.api_url + 'profile/?' + urllib.urlencode(parameters))
         c.setopt(pycurl.HTTPHEADER, self.headers)
         c.setopt(pycurl.WRITEFUNCTION, buf.write)
         c.perform()
@@ -104,8 +107,8 @@ class Api:
             elif profiles['meta']['total_count'] == 1:
                 return True, profiles['objects'][0]
             else:
-                return True, None
-        return True, None
+                return False, None
+        return False, None
 
     def insert_profile(self, player, player_uri):
 
