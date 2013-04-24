@@ -39,8 +39,6 @@ A basic example looks like the following script:
     API_URL="API URL"
     API_USER="API User"
     API_KEY="API Key"
-    API_USER_RESOURCE_URI="API resource for User"
-    API_SERVER_RESOURCE_URI="API resource for Server"
 
     while true
     do
