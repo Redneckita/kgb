@@ -24,12 +24,10 @@ import socket as SO
 class Error(Exception):
     """Base class for exceptions in this module."""
     pass
-    # print 'Exception'
 
 class ConnectionError(Error):
     """Error in network connection or protocol."""
     pass
-    # print 'Error in network connection or protocol'
 
 class Connection(object):
     """

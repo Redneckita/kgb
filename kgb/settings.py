@@ -2,6 +2,8 @@ BOT_NAME = "Klaus BOT"
 BOT_VERSION = "0.8"
 BOT_PREFIX = "^0[^1KGB^0] "
 BOT_MESSAGES_COLOR_PREFIX = "^7"
+BOT_MESSAGE_STOP = "KGB stops reading your logs..."
+BOT_MESSAGE_START = "KGB started reading your logs!!"
 
 # BOT MESSAGES
 MESSAGE_VERSION = "This is ^1%s ^7version ^5%s" % (BOT_NAME, BOT_VERSION)
@@ -9,7 +11,7 @@ MESSAGE_VERSION = "This is ^1%s ^7version ^5%s" % (BOT_NAME, BOT_VERSION)
 MESSAGE_PERMISSION = "Permission required, minimum level is %s"
 
 SPAM_MESSAGES_TIMEOUT = 180
-SPAM_MESSAGES = {}
+SPAM_MESSAGES = []
 
 REPLACE_STRINGS = [
     ("^1","")
@@ -71,11 +73,11 @@ COMMANDS = {
         "syntax": "syntax is !!mute <playername|id>",
         "function": "mute"
     },                
-    "aych": {
-        "command": "!!aych",
-        "command_slug": "!!y",
+    "die": {
+        "command": "!!die",
+        "command_slug": "!!d",
         "min_level": 100,
-        "syntax": "syntax is !!aych <on|off>",
-        "function": "aych"
+        "syntax": "syntax is !!die",
+        "function": "stop"
     },     
 }

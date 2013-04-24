@@ -1,5 +1,6 @@
 import sys, base64, re, time, optparse
 from parser import parser
+from kgb import settings as settings
 
 class Main:
 
@@ -14,27 +15,38 @@ class Main:
         params.add_option('-u', '--api_url', help='url for json api, ask to klaus@rkf-klan.org', dest='api_url')
         params.add_option('-a', '--api_user', help='user for json api, ask to klaus@rkf-klan.org', dest='api_user')
         params.add_option('-k', '--api_key', help='key for json api, ask to klaus@rkf-klan.org', dest='api_key')
-        params.add_option('-e', '--api_user_resource', help='resource for api user, ask to klaus@rkf-klan.org', dest='api_user_resource_uri')
-        params.add_option('-f', '--api_server_resource', help='resource for api server, ask to klaus@rkf-klan.org', dest='api_server_resource_uri')
-
 
         (opts, args) = params.parse_args()
 
         if opts.server_address is None or opts.server_port is None \
             or opts.server_log is None or opts.rcon_passwd is None \
             or opts.api_url is None or opts.api_user is None \
-            or opts.api_key is None or opts.api_user_resource_uri is None \
-            or opts.api_server_resource_uri is None:
+            or opts.api_key is None:
+
             # "A mandatory option is missing\n"
 
             params.print_help()
             exit(-1) 
         else:
             log_parser = parser.Parser(opts.server_log)
-            evaluator = parser.Evaluator(opts.server_address, int(opts.server_port), opts.rcon_passwd.decode("base64", "strict"), opts.api_url, opts.api_user, opts.api_key, opts.api_user_resource_uri, opts.api_server_resource_uri)
+            evaluator = parser.Evaluator(opts.server_address, int(opts.server_port), opts.rcon_passwd.decode("base64", "strict"), opts.api_url, opts.api_user, opts.api_key)
+            evaluator.evaluate_spam()
+
+            evaluator.start()
+            seconds = 0
             while 1:
                 sys.stdout.flush()
                 time.sleep(1)
+
+                # SPAM MESSAGES
+                seconds += 1
+                # print seconds
+                # print settings.SPAM_MESSAGES_TIMEOUT
+                # print len(settings.SPAM_MESSAGES)
+                if int(seconds) == int(settings.SPAM_MESSAGES_TIMEOUT) and len(settings.SPAM_MESSAGES)>0:
+                    seconds = 0
+                    evaluator.put_spam()
+
 
                 data = log_parser.read()
                 if data is not None:

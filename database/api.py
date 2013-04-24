@@ -2,17 +2,86 @@ import pycurl, json, cStringIO, urllib
 
 class Api:
 
-    def __init__(self, username, api_key, api_url, api_server_uri, api_user_uri):
+    def __init__(self, username, api_key, api_url):
 
         self.api_url = api_url
-        self.api_server_uri = api_server_uri
-        self.api_user_uri = api_user_uri
+        self.api_server_uri = '' # api_server_uri
+        self.api_user_uri = '' # api_user_uri
         self.headers = [
             "Content-Type: application/json",
             "Authorization: ApiKey %s:%s" % (username, api_key),
         ]
 
+
+    def get_server(self):
+
+        buf = cStringIO.StringIO()
+        c = pycurl.Curl()
+        c.setopt(pycurl.URL, self.api_url + 'server/')
+        c.setopt(pycurl.HTTPHEADER, self.headers)
+        c.setopt(pycurl.WRITEFUNCTION, buf.write)
+        c.perform()
+        server = json.loads(buf.getvalue())
+        buf.close()
+        if c.getinfo(pycurl.HTTP_CODE)==200:
+            if server['meta']['total_count'] == 0:
+                return False, None
+            elif server['meta']['total_count'] == 1:
+                return True, server['objects'][0]
+            else:
+                return False, None
+        return False, None
+
+    def get_server_configs(self):
+
+        buf = cStringIO.StringIO()
+        c = pycurl.Curl()
+        c.setopt(pycurl.URL, self.api_url + 'server_config/')
+        c.setopt(pycurl.HTTPHEADER, self.headers)
+        c.setopt(pycurl.WRITEFUNCTION, buf.write)
+        c.perform()
+        server_configs = json.loads(buf.getvalue())
+        buf.close()
+        if c.getinfo(pycurl.HTTP_CODE)==200:
+            return True, server_configs['objects']
+        return False, None
+
+    def get_user(self):
+
+        buf = cStringIO.StringIO()
+        c = pycurl.Curl()
+        c.setopt(pycurl.URL, self.api_url + 'user/')
+        c.setopt(pycurl.HTTPHEADER, self.headers)
+        c.setopt(pycurl.WRITEFUNCTION, buf.write)
+        c.perform()
+        user = json.loads(buf.getvalue())
+        buf.close()
+        if c.getinfo(pycurl.HTTP_CODE)==200:
+            if user['meta']['total_count'] == 0:
+                return False, None
+            elif user['meta']['total_count'] == 1:
+                return True, user['objects'][0]
+            else:
+                return False, None
+        return False, None
+
     def get_player(self, guid):
+
+        if self.api_server_uri == '':
+            server_found, server_obj = self.get_server()
+            if not server_found:
+                print 'server resource_uri not found! check your input parameters'
+                return False, None
+            else:
+                self.api_server_uri = server_obj['resource_uri']
+
+        if self.api_user_uri == '':
+            user_found, user_obj = self.get_user()
+            if not user_found:
+                print 'user resource_uri not found! check you input parameters'
+                return False, None
+            else:
+                self.api_user_uri = user_obj['resource_uri']        
 
         buf = cStringIO.StringIO()
         c = pycurl.Curl()

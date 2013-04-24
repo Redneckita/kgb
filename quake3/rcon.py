@@ -1,4 +1,4 @@
-import time
+import time, sys
 from quake3 import pyquake3 as quake
 from kgb import settings as settings
 
@@ -153,21 +153,17 @@ class Rcon:
             help_command = '!!help %s' % command[0].replace('!!', '')
             self.help(args[0], help_command, args[2])
 
-    def aych(self, *args, **kwargs):
+    def stop(self, *args, **kwargs):
         
         admin = args[0]
         command = args[1]
         print 'admin is %s and command is %s' % (admin.name, command)
         command = command.split()
         print command
-        if len(command) == 2 and command[1] in ['on', 'off']:
-            # comando ok
-            print 'eseguo comando'
-            if command[1] == 'on':
-                print 'on attivo'
-            else:
-                print 'off disattivo'
+        if len(command) == 1:
+            self.putMessage(None, settings.BOT_MESSAGE_STOP)
+            time.sleep(1)
+            sys.exit(1)
         else:
             help_command = '!!help %s' % command[0].replace('!!', '')
-            self.help(args[0], help_command, args[2])
-    
+            self.help(args[0], help_command, args[2])             

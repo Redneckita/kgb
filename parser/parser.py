@@ -3,6 +3,7 @@ import re
 from kgb import settings as settings
 from quake3 import rcon
 from database import api
+from random import choice
 
 class Parser:
 
@@ -28,7 +29,7 @@ class Parser:
 
 class Evaluator:
 
-    def __init__(self, host_address, host_port, rcon_passwd, api_url , api_user, api_key, api_user_resource_uri, api_server_resource_uri):
+    def __init__(self, host_address, host_port, rcon_passwd, api_url , api_user, api_key):
         self.host_address = host_address
         self.host_port = host_port
         self.rcon_passwd = rcon_passwd
@@ -37,9 +38,22 @@ class Evaluator:
         self.api_url = api_url
         self.api_user = api_user
         self.api_key = api_key
-        self.api_user_resource_uri = api_user_resource_uri
-        self.api_server_resource_uri = api_server_resource_uri
-        self.api = api.Api(api_user, api_key, api_url, api_server_resource_uri, api_user_resource_uri)
+        self.api = api.Api(api_user, api_key, api_url)
+
+    def evaluate_spam(self):
+        server_config_found, server_config_objs = self.api.get_server_configs()
+        if server_config_found:
+            for item in server_config_objs:
+                if item['code'] == 'SPAM_MESSAGE':
+                    settings.SPAM_MESSAGES.append(item['value'])
+                elif item['code'] == 'SPAM_MESSAGES_TIMEOUT':
+                    settings.SPAM_MESSAGES_TIMEOUT = item['value']
+
+    def put_spam(self):
+        self.rc.putMessage(None, str(choice(settings.SPAM_MESSAGES))) 
+
+    def start(self):
+        self.rc.putMessage(None, settings.BOT_MESSAGE_START)            
 
     def evaluate_player(self, data):            
 
