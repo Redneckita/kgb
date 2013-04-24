@@ -53,16 +53,7 @@ A basic example looks like the following script:
       echo "      /\"\\"
       echo ""
       sleep 3
-      python2.7 $BOTROOT/main.py \
-        -s "$SERVER_ADDRESS" \
-        -p "$SERVER_PORT" \
-        -r "$SERVER_RCON_PASSWD" \
-        -l "$SERVER_LOG" \
-        -u "$API_URL" \
-        -a "$API_USER" \
-        -k "$API_KEY" \
-        -e "$API_USER_RESOURCE_URI" \
-        -f "$API_SERVER_RESOURCE_URI"
+      python2.7 $BOTROOT/main.py -s $SERVER_ADDRESS -p $SERVER_PORT -r $SERVER_RCON_PASSWD -l $SERVER_LOG -u $API_URL -a $API_USER -k $API_KEY
 
       echo "$(date): Klaus Game Bot restarted." >> $BOTLOGFILE
     done
