@@ -1,6 +1,7 @@
 import sys, base64, re, time, optparse
 from parser import parser
 from kgb import settings as settings
+from quake3 import pyquake3 as quake
 
 class Main:
 
@@ -30,23 +31,42 @@ class Main:
         else:
             log_parser = parser.Parser(opts.server_log)
             evaluator = parser.Evaluator(opts.server_address, int(opts.server_port), opts.rcon_passwd.decode("base64", "strict"), opts.api_url, opts.api_user, opts.api_key)
-            evaluator.evaluate_spam()
+            evaluator.evaluate_config()
 
             evaluator.start()
+            
             seconds = 0
+            check_seconds = 0
             while 1:
                 sys.stdout.flush()
                 time.sleep(1)
 
                 # SPAM MESSAGES
                 seconds += 1
-                # print seconds
-                # print settings.SPAM_MESSAGES_TIMEOUT
-                # print len(settings.SPAM_MESSAGES)
                 if int(seconds) == int(settings.SPAM_MESSAGES_TIMEOUT) and len(settings.SPAM_MESSAGES)>0:
                     seconds = 0
                     evaluator.put_spam()
 
+                #check per reset g_password
+                check_seconds += 1
+                if settings.SERVER_CLOSED != 'YES' and check_seconds == int(settings.SERVER_CLOSED_TIMEOUT):
+                    check_seconds = 0
+                    a = quake.Administrator(opts.server_address, int(opts.server_port), opts.rcon_passwd.decode("base64", "strict"))
+                    a.rcon_update()
+                    players = a.players
+                    if len(players) == 0:
+                        a.rcon_command('g_password ""')
+
+                # BOMB check
+                if settings.BOMB_ACTIVE:
+                    settings.BOMB_SECONDS +=1
+                    if settings.BOMB_SECONDS == 30:
+                        a = quake.Administrator(opts.server_address, int(opts.server_port), opts.rcon_passwd.decode("base64", "strict"))
+                        for slap in range(1,30):
+                            a.rcon_command('slap %d' % int(settings.BOMBED_PLAYER.slot))
+                    elif settings.BOMB_SECONDS == 20:
+                        a = quake.Administrator(opts.server_address, int(opts.server_port), opts.rcon_passwd.decode("base64", "strict"))
+                        a.rcon_command('bigtext "^710 Seconds Remaining... Come on ^1%s! ^7Its Gunna BLOW !!!"' % settings.BOMBED_PLAYER.name)
 
                 data = log_parser.read()
                 if data is not None:

@@ -139,6 +139,22 @@ class Api:
                 return True, None
         return True, None
 
+    def get_aliases(self, guid):
+
+        buf = cStringIO.StringIO()
+        c = pycurl.Curl()
+        print guid
+        parameters = {'player__guid': guid}
+        c.setopt(pycurl.URL, self.api_url + 'alias/?' + urllib.urlencode(parameters))
+        c.setopt(pycurl.HTTPHEADER, self.headers)
+        c.setopt(pycurl.WRITEFUNCTION, buf.write)
+        c.perform()
+        aliases = json.loads(buf.getvalue())
+        buf.close()
+        if c.getinfo(pycurl.HTTP_CODE)==200:
+            return True, aliases
+        return False, None        
+
     def insert_alias(self, player, player_uri):
 
         alias_json = {"alias": player.name, "player": player_uri, "owner": self.api_user_uri}

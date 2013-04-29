@@ -33,14 +33,14 @@ class Evaluator:
         self.host_address = host_address
         self.host_port = host_port
         self.rcon_passwd = rcon_passwd
-        self.rc = rcon.Rcon(self.host_address, self.host_port, self.rcon_passwd)
+        self.rc = rcon.Rcon(self.host_address, self.host_port, self.rcon_passwd, api_url, api_user, api_key)
 
         self.api_url = api_url
         self.api_user = api_user
         self.api_key = api_key
         self.api = api.Api(api_user, api_key, api_url)
 
-    def evaluate_spam(self):
+    def evaluate_config(self):
         server_config_found, server_config_objs = self.api.get_server_configs()
         if server_config_found:
             for item in server_config_objs:
@@ -48,6 +48,10 @@ class Evaluator:
                     settings.SPAM_MESSAGES.append(item['value'])
                 elif item['code'] == 'SPAM_MESSAGES_TIMEOUT':
                     settings.SPAM_MESSAGES_TIMEOUT = item['value']
+                elif item['code'] == 'SERVER_CLOSED':
+                    settings.SERVER_CLOSED = item['value']
+                elif item['code'] == 'SERVER_CLOSED_TIMEOUT':
+                    settings.SERVER_CLOSED_TIMEOUT = item['value']
 
     def put_spam(self):
         self.rc.putMessage(None, str(choice(settings.SPAM_MESSAGES))) 
