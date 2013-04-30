@@ -71,7 +71,7 @@ class Main:
                 data = log_parser.read()
                 if data is not None:
                     for x in data:
-                        if x.find("ClientUserinfo:") != -1 or x.find("ClientUserinfoChanged:")!=-1:
+                        if x.find("ClientUserinfo:") != -1 or x.find("ClientUserinfoChanged:")!=-1 or x.find("ClientBegin:")!=-1:
                             """
                             check for existing player and player info
                             """

@@ -101,6 +101,34 @@ class Api:
                 return False, None
         return False, None
 
+    def update_player_level(self, guid, level):
+
+        player_found = False
+        player_obj = None
+        player_found, player_obj = self.get_player(guid)
+
+        player_obj['level'] =  level
+
+        player_json = {"level": player_obj['level']}
+        player_data = json.dumps(player_json) 
+
+        buf = cStringIO.StringIO()
+        c = pycurl.Curl()
+        c.setopt(pycurl.URL, self.api_url + 'player/' + str(player_obj['id']) + '/')
+        c.setopt(pycurl.HTTPHEADER, self.headers)
+        c.setopt(pycurl.WRITEFUNCTION, buf.write)
+        c.setopt(pycurl.POST, 1)
+        c.setopt(pycurl.POSTFIELDS, player_data)
+        c.setopt(pycurl.CUSTOMREQUEST, "PATCH")
+        c.perform()
+        buf.close()
+        if c.getinfo(pycurl.HTTP_CODE) == 202:
+            return self.get_player(guid)
+        else:
+            return False, None
+
+        return player_found, player_obj
+
     def insert_player(self, player):
 
         player_json = {"name": player.name, "guid": player.guid, "level": 0, "server": self.api_server_uri, "owner": self.api_user_uri}
@@ -227,3 +255,48 @@ class Api:
             return self.get_profile(player.guid, player.address.split(":")[0])
         else:
             return False, None            
+
+    def get_bans(self, guid):
+
+        buf = cStringIO.StringIO()
+        c = pycurl.Curl()
+        parameters = {'player__guid': guid}
+        c.setopt(pycurl.URL, self.api_url + 'ban/?' + urllib.urlencode(parameters))
+        c.setopt(pycurl.HTTPHEADER, self.headers)
+        c.setopt(pycurl.WRITEFUNCTION, buf.write)
+        c.perform()
+        bans = json.loads(buf.getvalue())
+        buf.close()
+        if c.getinfo(pycurl.HTTP_CODE)==200:
+            if bans['meta']['total_count'] == 0:
+                return False, None
+            else:
+                return True, bans['objects']
+        return True, None            
+
+    def insert_ban(self, player, player_uri, ban_reason, ban_minute, is_permanent):
+
+        profile_json = {
+            "ip": player.address.split(":")[0], 
+            'ban_reason': ban_reason,
+            'ban_minute': ban_minute,
+            'is_permanent': is_permanent,
+            "player": player_uri, 
+            "owner": self.api_user_uri
+        }
+        profile_data = json.dumps(profile_json)
+
+        buf = cStringIO.StringIO()
+        c = pycurl.Curl()
+        c.setopt(pycurl.URL, self.api_url + 'ban/')
+        c.setopt(pycurl.HTTPHEADER, self.headers)
+        c.setopt(pycurl.WRITEFUNCTION, buf.write)
+        c.setopt(pycurl.POST, 1)
+        c.setopt(pycurl.POSTFIELDS, profile_data)
+        c.perform()
+        buf.close()
+        
+        if c.getinfo(pycurl.HTTP_CODE) == 201:
+            return True
+        else:
+            return False     

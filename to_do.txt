@@ -1,11 +1,10 @@
 
 
 
-!!admins    20  !!admins    print all online admins with level less than or equal your
 !!locate    20  !!locate {player|id}    print player country location
 !!ban   80  !!ban {player|id} {reason}  ban player
 !!tempban   80  !!tempban {player|id} {minutes} {reason}    tempban player
 !!baninfo   80  !!baninfo {player}  print player (online and offline) information to unban him
-!!baninfo   80  !!baninfo   print last 5 banned player (online and offline) information and useful information to unban
+!!baninfo 80 !!baninfo print last 5 banned player (online and offline) information and useful information o unban
 !!unban 80  !!unban {databaseid}    unban databaseid specified
-!!putgroup  100 !!putgroup {player|id} {0|20|40|60|80|100}  put user in specified group
+

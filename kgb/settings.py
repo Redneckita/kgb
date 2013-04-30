@@ -10,6 +10,11 @@ MESSAGE_VERSION = "This is ^1%s ^7version ^5%s" % (BOT_NAME, BOT_VERSION)
 MESSAGE_PERMISSION = "Permission denied, minimum required level is %s"
 MESSAGE_MOONON = "^1Fly me to the Moon..."
 MESSAGE_MOONOFF = "^2Welcome back to Earth!"
+ADMIN_LEVEL_GRANTED_SUCCESSFULLY = "Level granted!^3"
+ADMIN_LEVEL_REMOVED = "Admin ^3%s ^7took all your rights, you are now at Level ^30"
+ADMIN_LEVEL_FRIEND = "You are now ^3Friend^7.^3"
+ADMIN_LEVEL_GRANTED = "Admin level ^3%s ^7granted! Be careful!^3"
+ADMIN_LEVEL_GRANTED2 = "With great power comes great responsibility. Be careful!^3"
 
 SPAM_MESSAGES_TIMEOUT = 180
 SPAM_MESSAGES = []
@@ -243,7 +248,14 @@ COMMANDS = {
         "min_level": 40,
         "syntax": "syntax is !!admins",
         "function": "admins"
-    },      
+    },  
+    "putgroup": {
+        "command": "!!putgroup",
+        "command_slug": "!!pg",
+        "min_level": 20,
+        "syntax": "syntax is !!putgroup <playername|id> <level>",
+        "function": "putgroup"
+    },          
 }
 
 GEARS = [

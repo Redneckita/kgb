@@ -134,10 +134,10 @@ class Rcon:
         received_command = data.split()
         
         for command, command_prop in settings.COMMANDS.items():
-            if len(received_command) == 1 and int(admin_obj['level'])>command_prop['min_level']:
+            if len(received_command) == 1 and int(admin_obj['level'])>=command_prop['min_level']:
                 self.putMessage(admin.slot, '%s (%s). %s' % (command_prop['command'], command_prop['command_slug'], command_prop['syntax']))
                 time.sleep(1)
-            elif len(received_command) == 2 and int(admin_obj['level'])>command_prop['min_level']:
+            elif len(received_command) == 2 and int(admin_obj['level'])>=command_prop['min_level']:
                 if received_command[1] == command or received_command[1] == command_prop['command'].replace('!!', '') or received_command[1] == command_prop['command_slug'].replace('!!', ''):
                     self.putMessage(admin.slot, '%s (%s). %s' % (command_prop['command'], command_prop['command_slug'], command_prop['syntax']))
                     time.sleep(1)
@@ -874,8 +874,7 @@ class Rcon:
                 self.putCommand('bigtext "^1Team Death Jump Deactivated, ENJOY!!!"')
                 self.putCommand('restart')
             else:
-                help_command = '!!help %s' % command[0].replace('!!', '')
-                self.help(args[0], help_command, args[2])                    
+                self.putMessage(admin.slot, "available parameters are: on|off")                  
         else:
             help_command = '!!help %s' % command[0].replace('!!', '')
             self.help(args[0], help_command, args[2])    
@@ -931,3 +930,31 @@ class Rcon:
         else:
             help_command = '!!help %s' % command[0].replace('!!', '')
             self.help(args[0], help_command, args[2])                                               
+
+    def putgroup(self, *args, **kwargs):
+        
+        admin = args[0]
+        command = args[1]
+        print 'admin is %s and command is %s' % (admin.name, command)
+        command = command.split()
+        if len(command) == 3:
+            if command[2] in ['0', '20', '40', '60', '80', '100']:
+                player_found, player_obj = self.getFullPlayer(command[1])
+                if player_found:
+                    updated_player, updated_player_obj = self.api.update_player_level(player_obj.guid, int(command[2]))
+                    if updated_player:
+                        self.putMessage(admin.slot, settings.ADMIN_LEVEL_GRANTED_SUCCESSFULLY)
+                        if int(command[2]) == 0:
+                            self.putMessage(int(player_obj.slot), settings.ADMIN_LEVEL_REMOVED % admin.name)
+                        elif int(command[2]) == 20:
+                            self.putMessage(int(player_obj.slot), settings.ADMIN_LEVEL_FRIEND)
+                        else:
+                            self.putMessage(int(player_obj.slot), settings.ADMIN_LEVEL_GRANTED % command[2])
+                            self.putMessage(int(player_obj.slot), settings.ADMIN_LEVEL_GRANTED2)      
+                else:
+                    self.putMessage(admin.slot, "player doesn't exist or too many player") 
+            else:
+                self.putMessage(admin.slot, "available levels are: 0|20|40|60|80|100")                                           
+        else:
+            help_command = '!!help %s' % command[0].replace('!!', '')
+            self.help(args[0], help_command, args[2])                

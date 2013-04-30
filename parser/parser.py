@@ -1,5 +1,7 @@
 import os
 import re
+import time
+import datetime
 from kgb import settings as settings
 from quake3 import rcon
 from database import api
@@ -107,6 +109,38 @@ class Evaluator:
                     else:
                         # 'profile esiste'
                         pass
+
+
+        if data.find("ClientBegin:") !=  -1:                                                           # *** CLIENTCONNECT
+            res = re.search(r"ClientBegin: (?P<id>\d+)", data)
+            if res:
+                player = self.rc.getPlayer(res.group("id"))
+                
+                if player:
+                    # 'player esiste, verifico se e' bannato
+                    bans_found, bans_obj = self.api.get_bans(player.guid)
+                    if bans_found is not None and bans_found:
+                        # 'verifico se esiste un ban attivo'
+                        for ban in bans_obj:
+                            if ban['is_permanent']:
+                                # ban permanente, lo kikko
+                                self.rc.putMessage(player.slot, str(ban['ban_reason']))
+                                self.rc.putCommand('kick %d' % player.slot)
+                            else:
+                                c = time.strptime(str(ban['created']),"%Y-%m-%dT%H:%M:%S")
+                                t = time.mktime(c)
+                                t = t + (int(ban['ban_minute'])*60)
+                                t = time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(t))
+                                if t >= str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")):
+                                    print "tempban con scadenza %s per %s. kick" % (t, player.guid)
+                                    self.rc.putMessage(player.slot, str(ban['ban_reason']))
+                                    self.rc.putCommand("kick %d" % (player.slot))
+                                else:
+                                    print "tempban scaduto il %s per %s" % (t, player.guid)
+                    else:
+                        print 'player isn\'t banned'
+                        
+
 
     def evaluate_command(self, x):
 
