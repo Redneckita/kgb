@@ -119,45 +119,47 @@ class Evaluator:
                 player = self.rc.getPlayer(res.group("id"))
                 
                 if player:
-
-                    # 'player esiste, verifico se inserire profile'
-                    profile_found, profile_obj = self.api.get_profile(player.guid, player.address.split(":")[0])
-                    if profile_found is not None and not profile_found:
-                        # 'profile non trovato, lo inserisco'
-                        profile_found, profile_obj = self.api.insert_profile(player, player_obj['resource_uri'])
-                        if profile_found:
-                            # 'profile inserito'
-                            pass
-                    else:
-                        # 'profile esiste'
-                        pass
-                                            
-                    # 'player esiste, verifico se e' bannato
-                    bans_found, bans_obj = self.api.get_bans(player.guid)
-                    if bans_found is not None and bans_found:
-                        # 'verifico se esiste un ban attivo'
-                        for ban in bans_obj:
-                            if ban['is_permanent']:
-                                # ban permanente, lo kikko
-                                print "perban per %s. kick" % (player.guid)
-                                self.rc.putMessage(player.slot, "You are ^1permbanned!")                                
-                                self.rc.putMessage(player.slot, "Reason: ^1" + str(ban['ban_reason']))
-                                self.rc.putCommand('kick %d' % player.slot)
+                    if player and player.guid != '' and player.guid is not None:
+                        player_found, player_obj = self.api.get_player(player.guid)
+                        if player_found:
+                            # 'player esiste, verifico se inserire profile'
+                            profile_found, profile_obj = self.api.get_profile(player.guid, player.address.split(":")[0])
+                            if profile_found is not None and not profile_found:
+                                # 'profile non trovato, lo inserisco'
+                                profile_found, profile_obj = self.api.insert_profile(player, player_obj['resource_uri'])
+                                if profile_found:
+                                    # 'profile inserito'
+                                    pass
                             else:
-                                c = time.strptime(str(ban['created']),"%Y-%m-%dT%H:%M:%S")
-                                t = time.mktime(c)
-                                t = t + (int(ban['ban_minute'])*60)
-                                t = time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(t))
-                                if t >= str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")):
-                                    print "tempban con scadenza %s per %s. kick" % (t, player.guid)
-                                    self.rc.putMessage(player.slot, "You are ^1tempbanned!")                                     
-                                    self.rc.putMessage(player.slot, "Reason: ^1" + str(ban['ban_reason']))
-                                    self.rc.putCommand("kick %d" % (player.slot))
-                                else:
-                                    print "tempban scaduto il %s per %s" % (t, player.guid)
-                    else:
-                        print 'player isn\'t banned'
-                        
+                                # 'profile esiste'
+                                pass
+
+                            # 'player esiste, verifico se e' bannato
+                            bans_found, bans_obj = self.api.get_bans(player.guid)
+                            if bans_found is not None and bans_found:
+                                # 'verifico se esiste un ban attivo'
+                                for ban in bans_obj:
+                                    if ban['is_permanent']:
+                                        # ban permanente, lo kikko
+                                        print "perban per %s. kick" % (player.guid)
+                                        self.rc.putMessage(player.slot, "You are ^1permbanned!")                                
+                                        self.rc.putMessage(player.slot, "Reason: ^1" + str(ban['ban_reason']))
+                                        self.rc.putCommand('kick %d' % player.slot)
+                                    else:
+                                        c = time.strptime(str(ban['created']),"%Y-%m-%dT%H:%M:%S")
+                                        t = time.mktime(c)
+                                        t = t + (int(ban['ban_minute'])*60)
+                                        t = time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(t))
+                                        if t >= str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")):
+                                            print "tempban con scadenza %s per %s. kick" % (t, player.guid)
+                                            self.rc.putMessage(player.slot, "You are ^1tempbanned!")                                     
+                                            self.rc.putMessage(player.slot, "Reason: ^1" + str(ban['ban_reason']))
+                                            self.rc.putCommand("kick %d" % (player.slot))
+                                        else:
+                                            print "tempban scaduto il %s per %s" % (t, player.guid)
+                            else:
+                                print 'player isn\'t banned'
+                                
 
 
     def evaluate_command(self, x):
