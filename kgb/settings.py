@@ -1,5 +1,5 @@
 BOT_NAME = "Klaus BOT"
-BOT_VERSION = "0.8"
+BOT_VERSION = "2.0 Beta"
 BOT_PREFIX = "^0[^1KGB^0] "
 BOT_MESSAGES_COLOR_PREFIX = "^7"
 BOT_MESSAGE_STOP = "KGB stops reading your logs..."
