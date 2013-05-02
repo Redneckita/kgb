@@ -100,6 +100,26 @@ class Evaluator:
                         pass
 
 
+                    # # 'player esiste, verifico se inserire profile'
+                    # profile_found, profile_obj = self.api.get_profile(player.guid, player.address.split(":")[0])
+                    # if profile_found is not None and not profile_found:
+                    #     # 'profile non trovato, lo inserisco'
+                    #     profile_found, profile_obj = self.api.insert_profile(player, player_obj['resource_uri'])
+                    #     if profile_found:
+                    #         # 'profile inserito'
+                    #         pass
+                    # else:
+                    #     # 'profile esiste'
+                    #     pass
+
+
+        if data.find("ClientBegin:") !=  -1:                                                           # *** CLIENTCONNECT
+            res = re.search(r"ClientBegin: (?P<id>\d+)", data)
+            if res:
+                player = self.rc.getPlayer(res.group("id"))
+                
+                if player:
+
                     # 'player esiste, verifico se inserire profile'
                     profile_found, profile_obj = self.api.get_profile(player.guid, player.address.split(":")[0])
                     if profile_found is not None and not profile_found:
@@ -111,14 +131,7 @@ class Evaluator:
                     else:
                         # 'profile esiste'
                         pass
-
-
-        if data.find("ClientBegin:") !=  -1:                                                           # *** CLIENTCONNECT
-            res = re.search(r"ClientBegin: (?P<id>\d+)", data)
-            if res:
-                player = self.rc.getPlayer(res.group("id"))
-                
-                if player:
+                                            
                     # 'player esiste, verifico se e' bannato
                     bans_found, bans_obj = self.api.get_bans(player.guid)
                     if bans_found is not None and bans_found:
