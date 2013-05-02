@@ -235,7 +235,9 @@ class Api:
         except: player.variables['sex'] = 0
         try: player.variables['weapmodes'] = player.variables['weapmodes']
         except: player.variables['weapmodes'] = 0
-                                        
+        try: player.variables['gear'] = player.variables['gear']
+        except: player.variables['gear'] = 0
+                                                
         profile_json = {
             "ip": player.address.split(":")[0], 
             "rate": str(player.rate), 
