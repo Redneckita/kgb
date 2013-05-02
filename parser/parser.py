@@ -54,6 +54,8 @@ class Evaluator:
                     settings.SERVER_CLOSED = item['value']
                 elif item['code'] == 'SERVER_CLOSED_TIMEOUT':
                     settings.SERVER_CLOSED_TIMEOUT = item['value']
+                elif item['code'] == 'EXCLUDE_COMMAND':
+                    settings.EXCLUDE_COMMANDS.append(item['value'])                    
 
     def put_spam(self):
         self.rc.putMessage(None, str(choice(settings.SPAM_MESSAGES))) 
@@ -161,6 +163,11 @@ class Evaluator:
             data = message.split()
             for command, command_prop in settings.COMMANDS.items():
                 if data[0] == command_prop['command'] or data[0] == command_prop['command_slug']:
+                    # controllo se e' un comando escluso
+                    for exclude_command in settings.EXCLUDE_COMMANDS:
+                        if command_prop['command'] == str(exclude_command):
+                            return True
+                       
                     # 'e\' un comando, verifico se il player ha i permessi'
                     player = self.rc.getPlayer(res.group("id"))
                     is_authorized = False
@@ -177,5 +184,5 @@ class Evaluator:
                             self.rc.putMessage(player.slot, settings.MESSAGE_PERMISSION % (command_prop['min_level']))
                     else:
                         # 'no player'
-                        pass
+                                pass
             

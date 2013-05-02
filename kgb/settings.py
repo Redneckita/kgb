@@ -19,6 +19,8 @@ ADMIN_LEVEL_GRANTED2 = "With great power comes great responsibility. Be careful!
 SPAM_MESSAGES_TIMEOUT = 180
 SPAM_MESSAGES = []
 
+EXCLUDE_COMMANDS = []
+
 SERVER_CLOSED = "NO"
 SERVER_CLOSED_TIMEOUT = 180
 
