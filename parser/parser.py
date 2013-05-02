@@ -159,7 +159,8 @@ class Evaluator:
                                             print "tempban scaduto il %s per %s" % (t, player.guid)
                             else:
                                 print 'player isn\'t banned'
-                                
+                        else:
+                            print 'player not found'  
 
 
     def evaluate_command(self, x):
