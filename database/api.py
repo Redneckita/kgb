@@ -274,17 +274,43 @@ class Api:
                 return True, bans['objects']
         return True, None            
 
-    def insert_ban(self, player, player_uri, ban_reason, ban_minute, is_permanent):
+    def insert_ban(self, player, ban_reason, ban_minute, is_permanent):
 
-        profile_json = {
-            "ip": player.address.split(":")[0], 
-            'ban_reason': ban_reason,
-            'ban_minute': ban_minute,
-            'is_permanent': is_permanent,
-            "player": player_uri, 
-            "owner": self.api_user_uri
-        }
-        profile_data = json.dumps(profile_json)
+        player_found, player_obj = self.get_player(player.guid)
+        if player_found:
+
+            profile_json = {
+                "ip": player.address.split(":")[0], 
+                'ban_reason': ban_reason,
+                'ban_minute': ban_minute,
+                'is_permanent': is_permanent,
+                "player": player_obj['resource_uri'], 
+                "owner": self.api_user_uri
+            }
+
+            profile_data = json.dumps(profile_json)
+
+            buf = cStringIO.StringIO()
+            c = pycurl.Curl()
+            c.setopt(pycurl.URL, self.api_url + 'ban/')
+            c.setopt(pycurl.HTTPHEADER, self.headers)
+            c.setopt(pycurl.WRITEFUNCTION, buf.write)
+            c.setopt(pycurl.POST, 1)
+            c.setopt(pycurl.POSTFIELDS, profile_data)
+            c.perform()
+            buf.close()
+            
+            if c.getinfo(pycurl.HTTP_CODE) == 201:
+                return True
+            else:
+                return False 
+        else:
+            return False    
+
+    def delete_ban(self, guid):
+
+        player_json = {"player__guid": guid}
+        player_data = json.dumps(player_json) 
 
         buf = cStringIO.StringIO()
         c = pycurl.Curl()
@@ -292,11 +318,11 @@ class Api:
         c.setopt(pycurl.HTTPHEADER, self.headers)
         c.setopt(pycurl.WRITEFUNCTION, buf.write)
         c.setopt(pycurl.POST, 1)
-        c.setopt(pycurl.POSTFIELDS, profile_data)
+        c.setopt(pycurl.POSTFIELDS, player_data)
+        c.setopt(pycurl.CUSTOMREQUEST, "DELETE")
         c.perform()
         buf.close()
-        
-        if c.getinfo(pycurl.HTTP_CODE) == 201:
+        if c.getinfo(pycurl.HTTP_CODE) == 204:
             return True
         else:
-            return False     
+            return False           

@@ -71,7 +71,7 @@ class Evaluator:
 
         if res:
             player = self.rc.getPlayer(res.group("id"))
-            if player and player.guid != '':
+            if player and player.guid.strip() != '':
                 player_found, player_obj = self.api.get_player(player.guid)
                 if not player_found:
                     # 'player non trovato, lo inserisco'
@@ -124,7 +124,9 @@ class Evaluator:
                         for ban in bans_obj:
                             if ban['is_permanent']:
                                 # ban permanente, lo kikko
-                                self.rc.putMessage(player.slot, str(ban['ban_reason']))
+                                print "perban per %s. kick" % (player.guid)
+                                self.rc.putMessage(player.slot, "You are ^1permbanned!")                                
+                                self.rc.putMessage(player.slot, "Reason: ^1" + str(ban['ban_reason']))
                                 self.rc.putCommand('kick %d' % player.slot)
                             else:
                                 c = time.strptime(str(ban['created']),"%Y-%m-%dT%H:%M:%S")
@@ -133,7 +135,8 @@ class Evaluator:
                                 t = time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(t))
                                 if t >= str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")):
                                     print "tempban con scadenza %s per %s. kick" % (t, player.guid)
-                                    self.rc.putMessage(player.slot, str(ban['ban_reason']))
+                                    self.rc.putMessage(player.slot, "You are ^1tempbanned!")                                     
+                                    self.rc.putMessage(player.slot, "Reason: ^1" + str(ban['ban_reason']))
                                     self.rc.putCommand("kick %d" % (player.slot))
                                 else:
                                     print "tempban scaduto il %s per %s" % (t, player.guid)

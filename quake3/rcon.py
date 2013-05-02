@@ -957,4 +957,53 @@ class Rcon:
                 self.putMessage(admin.slot, "available levels are: 0|20|40|60|80|100")                                           
         else:
             help_command = '!!help %s' % command[0].replace('!!', '')
-            self.help(args[0], help_command, args[2])                
+            self.help(args[0], help_command, args[2])        
+
+    def tempban(self, *args, **kwargs):
+        
+        admin = args[0]
+        command = args[1]
+        print 'admin is %s and command is %s' % (admin.name, command)
+        command = command.split(None, 3)
+        if len(command) == 4:
+            try:
+                command[2] = int(command[2])
+                player_found, player_obj = self.getFullPlayer(command[1])
+                if player_found:
+                    ban_player = self.api.insert_ban(player_obj, command[3], command[2], 0) 
+                    if ban_player:
+                        self.putMessage(None, "%s banned player %s for %d minutes (reason: %s)" % (admin.name, player_obj.name, int(command[2]), command[3]))
+
+                        self.putCommand("kick %d" % player_obj.slot) 
+                    else:
+                        self.putMessage(admin.slot, "player %s isn't temp banned" % player_obj.name)   
+                else:
+                    self.putMessage(admin.slot, "player doesn't exist or too many player") 
+            except:
+                self.putMessage(admin.slot, "you must specify number for minutes")                                           
+        else:
+            help_command = '!!help %s' % command[0].replace('!!', '')
+            self.help(args[0], help_command, args[2])                      
+
+    def permban(self, *args, **kwargs):
+        
+        admin = args[0]
+        command = args[1]
+        print 'admin is %s and command is %s' % (admin.name, command)
+        command = command.split(None, 2)
+        if len(command) == 3:
+            
+            player_found, player_obj = self.getFullPlayer(command[1])
+            if player_found:
+                ban_player = self.api.insert_ban(player_obj, command[2], 0, 1) 
+                if ban_player:
+                    self.putMessage(None, "%s permbanned player %s (reason: %s)" % (admin.name, player_obj.name, command[2]))
+                    self.putCommand("kick %d" % player_obj.slot) 
+                else:
+                    self.putMessage(admin.slot, "player %s isn't permbanned" % player_obj.name)   
+            else:
+                self.putMessage(admin.slot, "player doesn't exist or too many player") 
+                                              
+        else:
+            help_command = '!!help %s' % command[0].replace('!!', '')
+            self.help(args[0], help_command, args[2])   

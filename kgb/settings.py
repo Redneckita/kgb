@@ -255,7 +255,21 @@ COMMANDS = {
         "min_level": 20,
         "syntax": "syntax is !!putgroup <playername|id> <level>",
         "function": "putgroup"
-    },          
+    },     
+    "tempban": {
+        "command": "!!tempban",
+        "command_slug": "!!tb",
+        "min_level": 80,
+        "syntax": "syntax is !!tempban <playername|id> <minutes> <reason>",
+        "function": "tempban"
+    },  
+    "permban": {
+        "command": "!!permban",
+        "command_slug": "!!pb",
+        "min_level": 80,
+        "syntax": "syntax is !!permban <playername|id> <reason>",
+        "function": "permban"
+    },                
 }
 
 GEARS = [
