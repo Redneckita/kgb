@@ -73,7 +73,7 @@ class Evaluator:
 
         if res:
             player = self.rc.getPlayer(res.group("id"))
-            if player and player.guid != '':
+            if player and player.guid != '' and player.guid is not None:
                 player_found, player_obj = self.api.get_player(player.guid)
                 if not player_found:
                     # 'player non trovato, lo inserisco'

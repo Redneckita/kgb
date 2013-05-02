@@ -225,6 +225,17 @@ class Api:
 
     def insert_profile(self, player, player_uri):
 
+        try: player.variables['racered'] = player.variables['racered']
+        except: player.variables['racered'] = 0
+        try: player.variables['raceblue'] = player.variables['raceblue']
+        except: player.variables['raceblue'] = 0
+        try: player.variables['cg_rgb'] = player.variables['cg_rgb']
+        except: player.variables['cg_rgb'] = 0
+        try: player.variables['sex'] = player.variables['sex']
+        except: player.variables['sex'] = 0
+        try: player.variables['weapmodes'] = player.variables['weapmodes']
+        except: player.variables['weapmodes'] = 0
+                                        
         profile_json = {
             "ip": player.address.split(":")[0], 
             "rate": str(player.rate), 
