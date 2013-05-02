@@ -119,8 +119,6 @@ class Evaluator:
                 player = self.rc.getPlayer(res.group("id"))
                 
                 if player:
-
-                    
                     # 'player esiste, verifico se e' bannato
                     bans_found, bans_obj = self.api.get_bans(player.guid)
                     if bans_found is not None and bans_found:
