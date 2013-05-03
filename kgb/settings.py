@@ -308,7 +308,7 @@ COMMANDS = {
     "locate": {
         "command": "!!locate",
         "command_slug": "!!lc",
-        "min_level": 80,
+        "min_level": 20,
         "syntax": "syntax is !!locate <playername|id>",
         "description": "Locate a player at city level (if available, otherwise displays the Country)",
         "function": "locate"
