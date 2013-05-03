@@ -4,10 +4,11 @@ from kgb import settings as settings
 from database import api
 import random
 from random import choice
+from geoip import geocode
 
 class Rcon:
 
-    def __init__(self, host_address, host_port, rcon_passwd, api_url , api_user, api_key):
+    def __init__(self, host_address, host_port, rcon_passwd, api_url , api_user, api_key, geo_database):
         self.host_address = host_address
         self.host_port = host_port
         self.rcon_passwd = rcon_passwd
@@ -16,6 +17,9 @@ class Rcon:
         self.api_user = api_user
         self.api_key = api_key
         self.api = api.Api(api_user, api_key, api_url)
+
+        self.geo_database = geo_database
+        self.geocode = geocode.GeoCode(geo_database)
 
         self.b_balance = False
 
@@ -294,6 +298,8 @@ class Rcon:
                         for slap in range(1,30):
                             self.putCommand('slap %d' % settings.BOMBED_PLAYER.slot)
                 else:
+                    self.putMessage(int(admin.slot), "You are not bombed player")
+                    time.sleep(1)
                     self.putCommand('slap %d' % int(admin.slot))
 
                 settings.BOMB_ACTIVE = False
@@ -1007,3 +1013,32 @@ class Rcon:
         else:
             help_command = '!!help %s' % command[0].replace('!!', '')
             self.help(args[0], help_command, args[2])   
+
+    def locate(self, *args, **kwargs):
+        
+        admin = args[0]
+        command = args[1]
+        print 'admin is %s and command is %s' % (admin.name, command)
+        command = command.split()
+        if len(command) == 2:
+            player_found, player_obj = self.getFullPlayer(command[1])
+            if player_found:
+                geo_address = self.geocode.getInfoFromIP(player_obj.address.split(":")[0])
+                # print geo_address
+                city = geo_address['city']
+                country = geo_address['country_name']
+                location = ''
+                if country != '':
+                    location += country
+                if city != '':
+                    location += city + '(' + location + ')'
+
+                if location != '':
+                    self.putMessage(admin.slot, "%s comes from %s" % (admin.name, location))
+                else:
+                    self.putMessage(admin.slot, "cannot predict now where player from")
+            else:
+                self.putMessage(admin.slot, "player doesn't exist or too many player")
+        else:
+            help_command = '!!help %s' % command[0].replace('!!', '')
+            self.help(args[0], help_command, args[2])

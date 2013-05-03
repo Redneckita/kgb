@@ -16,13 +16,14 @@ class Main:
         params.add_option('-u', '--api_url', help='url for json api, ask to klaus@rkf-klan.org', dest='api_url')
         params.add_option('-a', '--api_user', help='user for json api, ask to klaus@rkf-klan.org', dest='api_user')
         params.add_option('-k', '--api_key', help='key for json api, ask to klaus@rkf-klan.org', dest='api_key')
+        params.add_option('-d', '--geo_dat', help='geocity database', dest='geo_database')
 
         (opts, args) = params.parse_args()
 
         if opts.server_address is None or opts.server_port is None \
             or opts.server_log is None or opts.rcon_passwd is None \
             or opts.api_url is None or opts.api_user is None \
-            or opts.api_key is None:
+            or opts.api_key is None or opts.geo_database is None:
 
             # "A mandatory option is missing\n"
 
@@ -30,7 +31,7 @@ class Main:
             exit(-1) 
         else:
             log_parser = parser.Parser(opts.server_log)
-            evaluator = parser.Evaluator(opts.server_address, int(opts.server_port), opts.rcon_passwd.decode("base64", "strict"), opts.api_url, opts.api_user, opts.api_key)
+            evaluator = parser.Evaluator(opts.server_address, int(opts.server_port), opts.rcon_passwd.decode("base64", "strict"), opts.api_url, opts.api_user, opts.api_key, opts.geo_database)
             evaluator.evaluate_config()
 
             evaluator.start()

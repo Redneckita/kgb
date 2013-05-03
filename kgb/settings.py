@@ -52,7 +52,7 @@ COMMANDS = {
         "command": "!!help",
         "command_slug": "!!h",
         "min_level": 0,
-        "syntax": "syntax is !!help <command>",
+        "syntax": "syntax is !!help or !!help <command>",
         "function": "help"
     },
     "bslap": {
@@ -108,7 +108,7 @@ COMMANDS = {
         "command": "!!wire",
         "command_slug": "!!w",
         "min_level": 0,
-        "syntax": "syntax is !!wire <color>",
+        "syntax": "syntax is !!wire <choice>",
         "function": "wire"
     },           
     "tell": {
@@ -271,7 +271,14 @@ COMMANDS = {
         "min_level": 80,
         "syntax": "syntax is !!permban <playername|id> <reason>",
         "function": "permban"
-    },                
+    }, 
+    "locate": {
+        "command": "!!locate",
+        "command_slug": "!!lc",
+        "min_level": 20,
+        "syntax": "syntax is !!locate <playername|id>",
+        "function": "locate"
+    },                     
 }
 
 GEARS = [

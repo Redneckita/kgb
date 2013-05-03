@@ -31,11 +31,12 @@ class Parser:
 
 class Evaluator:
 
-    def __init__(self, host_address, host_port, rcon_passwd, api_url , api_user, api_key):
+    def __init__(self, host_address, host_port, rcon_passwd, api_url , api_user, api_key, geo_database):
         self.host_address = host_address
         self.host_port = host_port
         self.rcon_passwd = rcon_passwd
-        self.rc = rcon.Rcon(self.host_address, self.host_port, self.rcon_passwd, api_url, api_user, api_key)
+        self.geo_database = geo_database
+        self.rc = rcon.Rcon(self.host_address, self.host_port, self.rcon_passwd, api_url, api_user, api_key, geo_database)
 
         self.api_url = api_url
         self.api_user = api_user
@@ -129,6 +130,7 @@ class Evaluator:
                                 print "perban per %s. kick" % (player.guid)
                                 self.rc.putMessage(player.slot, "You are ^1permbanned!")                                
                                 self.rc.putMessage(player.slot, "Reason: ^1" + str(ban['ban_reason']))
+                                time.sleep(1)
                                 self.rc.putCommand('kick %d' % player.slot)
                             else:
                                 c = time.strptime(str(ban['created']),"%Y-%m-%dT%H:%M:%S")
@@ -139,6 +141,7 @@ class Evaluator:
                                     print "tempban con scadenza %s per %s. kick" % (t, player.guid)
                                     self.rc.putMessage(player.slot, "You are ^1tempbanned!")                                     
                                     self.rc.putMessage(player.slot, "Reason: ^1" + str(ban['ban_reason']))
+                                    time.sleep(1)
                                     self.rc.putCommand("kick %d" % (player.slot))
                                 else:
                                     print "tempban scaduto il %s per %s" % (t, player.guid)

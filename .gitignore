@@ -1,3 +1,4 @@
 *.pyc
 *.sh
 *.log
+generate_html.py
