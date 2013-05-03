@@ -35,7 +35,7 @@ A basic example looks like the following script:
     BOTLOGFILE="Game instance bot logfile"
     # i.e. BOTLOGFILE="./kgb_bot.log"
 
-    # API parameters... ask klaus@rkf-clan.org or visit http://rkf-clan.org
+    # API parameters... ask on our K.G.B. forum at http://rkf-clan.org
     API_URL="API URL"
     API_USER="API User"
     API_KEY="API Key"
@@ -56,7 +56,7 @@ A basic example looks like the following script:
       echo "$(date): Klaus Game Bot restarted." >> $BOTLOGFILE
     done
 
-You may ask to klaus@rkf-clan.org or visit http://rkf-clan.org for all API_* parameters. 
+You may ask on our K.G.B. forum at http://rkf-clan.org for all API_* parameters. 
 K.G.B. is meant to be installed in one place, pointed by the environment variable BOTROOT, and have multiple 'run_bot.sh' scripts in separated folders allowing system administrators to manage multiple game servers with ease. Of course, you'll need unique API_* parameters for each server.
 
 
