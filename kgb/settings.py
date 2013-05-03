@@ -46,7 +46,7 @@ COMMANDS = {
         "command_slug": "!!v",
         "min_level": 0,
         "syntax": "syntax is !!version",
-    "description": "Print bot version",
+        "description": "Print bot version",
         "function": "version"
     },
     "help": {
@@ -54,7 +54,7 @@ COMMANDS = {
         "command_slug": "!!h",
         "min_level": 0,
         "syntax": "syntax is !!help <command>",
-    "description": "Display commands list and specific help for a command",
+        "description": "Display commands list and specific help for a command",
         "function": "help"
     },
     "bslap": {
@@ -62,7 +62,7 @@ COMMANDS = {
         "command_slug": "!!bs",
         "min_level": 80,
         "syntax": "syntax is !!bslap <playername|id>",
-    "description": "Bitchslap to death a player",
+        "description": "Bitchslap to death a player",
         "function": "bslap"
     },
     "slap": {
@@ -70,7 +70,7 @@ COMMANDS = {
         "command_slug": "!!s",
         "min_level": 60,
         "syntax": "syntax is !!slap <playername|id>",
-    "description": "Slap a player",
+        "description": "Slap a player",
         "function": "slap"
     },
     "kick": {
@@ -78,7 +78,7 @@ COMMANDS = {
         "command_slug": "!!k",
         "min_level": 80,
         "syntax": "syntax is !!kick <playername|id>",
-    "description": "Kick a player from the server",
+        "description": "Kick a player from the server",
         "function": "kick"
     },
     "nuke": {
@@ -86,7 +86,7 @@ COMMANDS = {
         "command_slug": "!!nk",
         "min_level": 60,
         "syntax": "syntax is !!nuke <playername|id>",
-    "description": "Nuke a player",
+        "description": "Nuke a player",
         "function": "nuke"
     },
     "mute": {
@@ -94,7 +94,7 @@ COMMANDS = {
         "command_slug": "!!m",
         "min_level": 40,
         "syntax": "syntax is !!mute <playername|id>",
-    "description": "Mute a player (toggle mute status)",
+        "description": "Mute a player (toggle mute status)",
         "function": "mute"
     },                
     "die": {
@@ -102,7 +102,7 @@ COMMANDS = {
         "command_slug": "!!d",
         "min_level": 100,
         "syntax": "syntax is !!die",
-    "description": "Shutdown (and possibly restart) the bot",
+        "description": "Shutdown (and possibly restart) the bot",
         "function": "stop"
     },     
     "bomb": {
@@ -110,7 +110,7 @@ COMMANDS = {
         "command_slug": "!!b",
         "min_level": 80,
         "syntax": "syntax is !!bomb <playername|id>",
-    "description": "Place a bomb that a player must defuse in 30 seconds, if player fails he get bitchslapped",
+        "description": "Place a bomb that a player must defuse in 30 seconds, if player fails he get bitchslapped",
         "function": "bomb"
     },       
     "wire": {
@@ -118,7 +118,7 @@ COMMANDS = {
         "command_slug": "!!w",
         "min_level": 0,
         "syntax": "syntax is !!wire <color>",
-    "description": "Use it to choose a wire to defuse a bomb",
+        "description": "Use it to choose a wire to defuse a bomb",
         "function": "wire"
     },           
     "tell": {
@@ -126,7 +126,7 @@ COMMANDS = {
         "command_slug": "!!tl",
         "min_level": 20,
         "syntax": "syntax is !!tell <playername|id> <phrase>",
-    "description": "Tell something to a player in private (no public/team chat)",
+        "description": "Tell something to a player in private (no public/team chat)",
         "function": "tell"
     },               
     "say": {
@@ -134,7 +134,7 @@ COMMANDS = {
         "command_slug": "!!sy",
         "min_level": 20,
         "syntax": "syntax is !!say <phrase>",
-    "description": "Talk to people, useful when you are in spectator mode",
+        "description": "Talk to people, useful when you are in spectator mode",
         "function": "say"
     },                   
     "bigtext": {
@@ -142,7 +142,7 @@ COMMANDS = {
         "command_slug": "!!bt",
         "min_level": 40,
         "syntax": "syntax is !!bigtext <phrase>",
-    "description": "Print a big centered text in the screen",
+        "description": "Print a big centered text in the screen",
         "function": "bigtext"
     },                      
     "shuffle": {
@@ -150,7 +150,7 @@ COMMANDS = {
         "command_slug": "!!sh",
         "min_level": 60,
         "syntax": "syntax is !!shuffle",
-    "description": "Shuffle (randomize) the teams",
+        "description": "Shuffle (randomize) the teams",
         "function": "shuffle"
     },                          
     "restart": {
@@ -158,7 +158,7 @@ COMMANDS = {
         "command_slug": "!!rs",
         "min_level": 60,
         "syntax": "syntax is !!restart",
-    "description": "Restart the game (not the bot)",
+        "description": "Restart the game (not the bot)",
         "function": "restart"
     },                          
     "reload": {
@@ -166,7 +166,7 @@ COMMANDS = {
         "command_slug": "!!rl",
         "min_level": 60,
         "syntax": "syntax is !!reload",
-    "description": "Reload the game (not the bot)",
+        "description": "Reload the game (not the bot)",
         "function": "reload"
     },                          
     "cyclemap": {
@@ -174,7 +174,7 @@ COMMANDS = {
         "command_slug": "!!cm",
         "min_level": 60,
         "syntax": "syntax is !!cyclemap",
-    "description": "Cycle to the next map in map cycle",
+        "description": "Cycle to the next map in map cycle",
         "function": "cyclemap"
     },              
     "forceteam": {
@@ -182,7 +182,7 @@ COMMANDS = {
         "command_slug": "!!ft",
         "min_level": 80,
         "syntax": "syntax is !!forceteam <playername|id> <red|blue|spec>",
-    "description": "Force a player in a team or in spectator mode",
+        "description": "Force a player in a team or in spectator mode",
         "function": "forceteam"
     },                  
     "nextmap": {
@@ -190,7 +190,7 @@ COMMANDS = {
         "command_slug": "!!nm",
         "min_level": 60,
         "syntax": "syntax is !!nextmap or !!nextmap <mapname>",
-    "description": "Display or set the next map in cycle",
+        "description": "Display or set the next map in cycle",
         "function": "nextmap"
     },                      
     "maps": {
@@ -198,7 +198,7 @@ COMMANDS = {
         "command_slug": "!!ms",
         "min_level": 20,
         "syntax": "syntax is !!maps",
-    "description": "Print available maps list",
+        "description": "Print available maps list",
         "function": "maps"
     },                      
     "map": {
@@ -206,7 +206,7 @@ COMMANDS = {
         "command_slug": "!!mp",
         "min_level": 60,
         "syntax": "syntax is !!map <mapname>",
-    "description": "Immediately change map",
+        "description": "Immediately change map",
         "function": "map"
     },                              
     "moon": {
@@ -214,7 +214,7 @@ COMMANDS = {
         "command_slug": "!!mo",
         "min_level": 60,
         "syntax": "syntax is !!moon <on|off>",
-    "description": "Lower gravity to g_gravity 100 (on) or raise it back to 800 (off)",
+        "description": "Lower gravity to g_gravity 100 (on) or raise it back to 800 (off)",
         "function": "moon"
     },             
     "weap": {
@@ -222,7 +222,7 @@ COMMANDS = {
         "command_slug": "!!wp",
         "min_level": 60,
         "syntax": "syntax is !!weap <+/-^1na^7de|+/-^1sn^7ipers|+/-^1sp^7as|+/-^1pi^7stols|+/-^1au^7tomatic|+/-^1ne^7gev|all|none>",
-    "description": "Weapon limiter, useful to set up a game for restricted weapons usage (i.e.: Pistols and nades only)",
+        "description": "Weapon limiter, useful to set up a game for restricted weapons usage (i.e.: Pistols and nades only)",
         "function": "weap"
     },                 
     "cfg": {
@@ -230,7 +230,7 @@ COMMANDS = {
         "command_slug": "!!cf",
         "min_level": 80,
         "syntax": "syntax is !!cfg or !!cfg <uz_conf_file>",
-    "description": "Load a UZ configuration file, if no parameter is given the bot will list all available UZ config files",
+        "description": "Load a UZ configuration file, if no parameter is given the bot will list all available UZ config files",
         "function": "cfg"
     },                     
     "close": {
@@ -238,7 +238,7 @@ COMMANDS = {
         "command_slug": "!!cl",
         "min_level": 80,
         "syntax": "syntax is !!close",
-    "description": "Close the server for PCW. Generates a random 4 digit password and gives it to the caller and stops the spamming of messages. When the server is empty the bot re-open it automatically. It's magic!",
+        "description": "Close the server for PCW. Generates a random 4 digit password and gives it to the caller and stops the spamming of messages. When the server is empty the bot re-open it automatically. It's magic!",
         "function": "close"
     }, 
     "open": {
@@ -246,7 +246,7 @@ COMMANDS = {
         "command_slug": "!!op",
         "min_level": 80,
         "syntax": "syntax is !!open",
-    "description": "Force re-opening of the server (clears password and start spamming messages again)",
+        "description": "Force re-opening of the server (clears password and start spamming messages again)",
         "function": "open"
     },         
     "teams": {
@@ -254,7 +254,7 @@ COMMANDS = {
         "command_slug": "!!ts",
         "min_level": 0,
         "syntax": "syntax is !!teams",
-    "description": "Do a team balance based upon score",
+        "description": "Do a team balance based upon score",
         "function": "teams"
     },  
     "tdj": {
@@ -262,7 +262,7 @@ COMMANDS = {
         "command_slug": "!!tj",
         "min_level": 80,
         "syntax": "syntax is !!tdj <on|off>",
-    "description": "Activate Team Death Jump mode (for jump servers). Server is reset and respawn protection is zeroed, all weapons available to all players... have fun!",
+        "description": "Activate Team Death Jump mode (for jump servers). Server is reset and respawn protection is zeroed, all weapons available to all players... have fun!",
         "function": "tdj"
     },
     "alias": {
@@ -270,7 +270,7 @@ COMMANDS = {
         "command_slug": "!!al",
         "min_level": 20,
         "syntax": "syntax is !!alias <playername|id>",
-    "description": "Print all known aliases for a player",
+        "description": "Print all known aliases for a player",
         "function": "alias"
     },   
     "admins": {
@@ -278,7 +278,7 @@ COMMANDS = {
         "command_slug": "!!ad",
         "min_level": 20,
         "syntax": "syntax is !!admins",
-    "description": "Print a list of connected admins and their levels",
+        "description": "Print a list of connected admins and their levels",
         "function": "admins"
     },  
     "putgroup": {
@@ -286,7 +286,7 @@ COMMANDS = {
         "command_slug": "!!pg",
         "min_level": 100,
         "syntax": "syntax is !!putgroup <playername|id> <level>",
-    "description": "Change a player's group, useful to make friends, recruits, junior and senior admins on the fly",
+        "description": "Change a player's group, useful to make friends, recruits, junior and senior admins on the fly",
         "function": "putgroup"
     },     
     "tempban": {
@@ -294,7 +294,7 @@ COMMANDS = {
         "command_slug": "!!tb",
         "min_level": 60,
         "syntax": "syntax is !!tempban <playername|id> <minutes> <reason>",
-    "description": "Temporarily ban a player specifying the duration in minutes and a reason for the ban",
+        "description": "Temporarily ban a player specifying the duration in minutes and a reason for the ban",
         "function": "tempban"
     },  
     "permban": {
@@ -302,9 +302,17 @@ COMMANDS = {
         "command_slug": "!!pb",
         "min_level": 80,
         "syntax": "syntax is !!permban <playername|id> <reason>",
-    "description": "Permanently ban a player with a reason",
+        "description": "Permanently ban a player with a reason",
         "function": "permban"
-    },                
+    },      
+    "locate": {
+        "command": "!!locate",
+        "command_slug": "!!lc",
+        "min_level": 80,
+        "syntax": "syntax is !!locate <playername|id>",
+        "description": "Locate a player at city level (if available, otherwise displays the Country)",
+        "function": "locate"
+    },               
 }
 
 GEARS = [
