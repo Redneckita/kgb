@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Kgb : Klaus Game Bot for Urban Terror" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Kgb</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/kl4us/kgb">View on GitHub</a>
+
+          <h1 id="project_title">Kgb</h1>
+          <h2 id="project_tagline">Klaus Game Bot for Urban Terror</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/kl4us/kgb/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/kl4us/kgb/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>K.G.B.</h1>
+
+<p>Klaus Game Bot (which its acronym is K.G.B.) is a rework of the first bot (<a href="https://code.google.com/p/k-g-b/">https://code.google.com/p/k-g-b/</a>) written in python 2.7 that aims to be a flexible, stable and performant game bot for Urban Terror 4.x servers. Skills, ratios and other 'statistical' features are voluntarily excluded from the developing in order to keep focus on performance and flexibility.</p>
+
+<p>K.G.B. is the ideal solution for a server that hosts multiple game instances because updates are managed centrally so that gameservers' admins don't need to worry about them. Their bot is always up-to-date and always get the latest bug fixes...</p>
+
+<h1>How to run K.G.B.</h1>
+
+<p>All the configuration parameters are kept within a single unix shell-script file, compiling that part is in charge of clan admins or game servers administrator.</p>
+
+<p>A basic example looks like the following script:</p>
+
+<pre><code>#!/bin/bash
+# ============
+# yourfolder/run_bot.sh
+SERVER_ADDRESS="Your server IP"
+# i.e. SERVER_ADDRESS="1.2.3.4"
+
+SERVER_PORT="Your server port"
+# i.e. SERVER_PORT="27960"
+
+SERVER_RCON_PASSWD="$(echo -n 'Your RCON password'|base64)"
+# i.e. SERVER_RCON_PASSWD="$(echo -n 'myl33trc0np4ssw0rd'|base64)"
+
+SERVER_LOG="Your server logfile absolute path"
+# i.e. SERVER_LOG="/opt/urbanterror41/.q3a/q3ut4/myurtserver.log"
+# (look for "seta g_log" line in server.cfg)
+
+BOTROOT="Main K.G.B. installation path"
+# i.e. BOTROOT="/opt/KlausGameBot"
+
+BOTLOGFILE="Game instance bot logfile"
+# i.e. BOTLOGFILE="./kgb_bot.log"
+
+# API parameters... ask on our K.G.B. forum at http://rkf-clan.org
+API_URL="API URL"
+API_USER="API User"
+API_KEY="API Key"
+
+# GEOIP Database
+GEOIP_DATABASE="Your GeoLiteCity.dat absolute path"
+
+while true
+do
+  echo -n "Starting Klaus Game Bot in 3 seconds..."
+  echo ""
+  echo ""
+  echo "    /\___/\\"
+  echo "    \ -.- /"
+  echo "    \`-.^.-'"
+  echo "      /\"\\"
+  echo ""
+  sleep 3
+  python2.7 $BOTROOT/main.py -s $SERVER_ADDRESS -p $SERVER_PORT -r $SERVER_RCON_PASSWD -l $SERVER_LOG -u $API_URL -a $API_USER -k $API_KEY -d $GEOIP_DATABASE
+
+  echo "$(date): Klaus Game Bot restarted." &gt;&gt; $BOTLOGFILE
+done
+</code></pre>
+
+<p>You may ask on our K.G.B. forum at <a href="http://rkf-clan.org">http://rkf-clan.org</a> for all API_* parameters. 
+K.G.B. is meant to be installed in one place, pointed by the environment variable BOTROOT, and have multiple 'run_bot.sh' scripts in separated folders allowing system administrators to manage multiple game servers with ease. Of course, you'll need unique API_* parameters for each server.</p>
+
+<h1>What's new</h1>
+
+<p>The new K.G.B. doesn't rely on a local database but communicates via RESTFUL APIs hosted by WebSite <a href="http://kgb-test.rkf-clan.org/">http://kgb-test.rkf-clan.org/</a>.
+Clan Admins can manage every aspect of their instance via the administration panel of the WebSite. They will be able to add/remove admins, ban/unban players, add/remove aliases and many other useful stuff.</p>
+
+<p>Via K.G.B. WebSite you can access a publicly shared page where you can view permanent bans (with demo, reason and banner) of all clans that use the bot.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Kgb maintained by <a href="https://github.com/kl4us">kl4us</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
