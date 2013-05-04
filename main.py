@@ -65,6 +65,10 @@ class Main:
                         a = quake.Administrator(opts.server_address, int(opts.server_port), opts.rcon_passwd.decode("base64", "strict"))
                         for slap in range(1,30):
                             a.rcon_command('slap %d' % int(settings.BOMBED_PLAYER.slot))
+                        settings.BOMB_ACTIVE = False
+                        settings.BOMB_SECONDS = 0
+                        settings.BOMBED_PLAYER = None
+                        settings.BOMBER_ADMIN = None                         
                     elif settings.BOMB_SECONDS == 20:
                         a = quake.Administrator(opts.server_address, int(opts.server_port), opts.rcon_passwd.decode("base64", "strict"))
                         a.rcon_command('bigtext "^710 Seconds Remaining... Come on ^1%s! ^7Its Gunna BLOW !!!"' % settings.BOMBED_PLAYER.name)
