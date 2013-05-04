@@ -1027,9 +1027,7 @@ class Rcon:
                 # print geo_address
                 city = str(geo_address['city'])
                 country = str(geo_address['country_name'])
-                print city
-                print country
-
+                
                 if city!="" and country!="":
                     self.putMessage(admin.slot, "%s comes from %s (%s)" % (admin.name, city, country))
                 elif city!="" and country=="":
