@@ -1027,16 +1027,15 @@ class Rcon:
                 # print geo_address
                 city = geo_address['city']
                 country = geo_address['country_name']
-                location = ''
-                if country != '':
-                    location += country
-                if city != '':
-                    location += city + '(' + location + ')'
 
-                if location != '':
-                    self.putMessage(admin.slot, "%s comes from %s" % (admin.name, location))
+                if str(city)!="" and str(country)!="":
+                    self.putMessage(admin.slot, "%s comes from %s (%s)" % (admin.name, city, country))
+                elif str(city)!="" and str(country)=="":
+                    self.putMessage(admin.slot, "%s comes from %s" % (admin.name, city))
+                elif str(city)=="" and str(country)!="":
+                    self.putMessage(admin.slot, "%s comes from %s" % (admin.name, country))
                 else:
-                    self.putMessage(admin.slot, "cannot predict now where player from")
+                    self.putMessage(admin.slot, "I don't know where player from")
             else:
                 self.putMessage(admin.slot, "player doesn't exist or too many player")
         else:
