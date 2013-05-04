@@ -1025,14 +1025,16 @@ class Rcon:
             if player_found:
                 geo_address = self.geocode.getInfoFromIP(player_obj.address.split(":")[0])
                 # print geo_address
-                city = geo_address['city']
-                country = geo_address['country_name']
+                city = str(geo_address['city'])
+                country = str(geo_address['country_name'])
+                print city
+                print country
 
-                if str(city)!="" and str(country)!="":
+                if city!="" and country!="":
                     self.putMessage(admin.slot, "%s comes from %s (%s)" % (admin.name, city, country))
-                elif str(city)!="" and str(country)=="":
+                elif city!="" and country=="":
                     self.putMessage(admin.slot, "%s comes from %s" % (admin.name, city))
-                elif str(city)=="" and str(country)!="":
+                elif city=="" and country!="":
                     self.putMessage(admin.slot, "%s comes from %s" % (admin.name, country))
                 else:
                     self.putMessage(admin.slot, "I don't know where player from")
