@@ -65,7 +65,7 @@ K.G.B. is meant to be installed in one place, pointed by the environment variabl
 
 What's new
 ====================
-The new K.G.B. doesn't rely on a local database but communicates via RESTFUL APIs hosted by WebSite http://kgb-test.rkf-clan.org/.
+The new K.G.B. doesn't rely on a local database but communicates via RESTFUL APIs hosted by WebSite http://kgb.rkf-clan.org/.
 Clan Admins can manage every aspect of their instance via the administration panel of the WebSite. They will be able to add/remove admins, ban/unban players, add/remove aliases and many other useful stuff.
 
 Via K.G.B. WebSite you can access a publicly shared page where you can view permanent bans (with demo, reason and banner) of all clans that use the bot.
