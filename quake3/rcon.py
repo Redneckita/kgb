@@ -922,11 +922,14 @@ class Rcon:
             s_admins = ""
             s_count = 0
             for player in players:
+                player_found = None
+                player_obj = None
                 player_found, player_obj = self.api.get_player(player.guid)
                 if player_found:
                     s_count += 1
                     if player_obj['level'] > 0:
-                        s_admins += player_obj['name'] + "(" + str(player_obj['level']) + ")"
+                        s_count += 1
+                        s_admins += player_obj['name'] + "(" + str(player_obj['level']) + ")" + " | "
                     if s_count == 5:
                         s_count = 0
                         self.putMessage(admin.slot, str(s_admins).rstrip(" | "))
