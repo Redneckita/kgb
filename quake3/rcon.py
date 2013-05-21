@@ -834,8 +834,8 @@ class Rcon:
                     bad_player_slot = player.slot
                     bad_score = player.frags
         if bad_player_slot != -1:
-            print "sposto il player + scarso con slot %d" % bad_player_slot
-            #print "forceteam %d %s" % (bad_player_slot, inflating_team)
+            # print "sposto il player + scarso con slot %d" % bad_player_slot
+            # print "forceteam %d %s" % (bad_player_slot, inflating_team)
             self.putCommand("forceteam %d %s" % (bad_player_slot, inflating_team)) 
 
     def tdj(self, *args, **kwargs):
