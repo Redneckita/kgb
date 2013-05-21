@@ -127,7 +127,7 @@ class Evaluator:
                         for ban in bans_obj:
                             if ban['is_permanent']:
                                 # ban permanente, lo kikko
-                                print "perban per %s. kick" % (player.guid)
+                                print "perban per %s (%s). kick" % (player.name, player.guid)
                                 self.rc.putMessage(player.slot, "You are ^1permbanned!")                                
                                 self.rc.putMessage(player.slot, "Reason: ^1" + str(ban['ban_reason']))
                                 time.sleep(1)
@@ -138,15 +138,17 @@ class Evaluator:
                                 t = t + (int(ban['ban_minute'])*60)
                                 t = time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(t))
                                 if t >= str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")):
-                                    print "tempban con scadenza %s per %s. kick" % (t, player.guid)
+                                    print "tempban con scadenza %s per %s (%s). kick" % (t, player.name, player.guid)
                                     self.rc.putMessage(player.slot, "You are ^1tempbanned!")                                     
                                     self.rc.putMessage(player.slot, "Reason: ^1" + str(ban['ban_reason']))
                                     time.sleep(1)
                                     self.rc.putCommand("kick %d" % (player.slot))
                                 else:
-                                    print "tempban scaduto il %s per %s" % (t, player.guid)
+                                    pass
+                                    # print "tempban scaduto il %s per %s" % (t, player.guid)
                     else:
-                        print 'player isn\'t banned'
+                        pass
+                        # print 'player isn\'t banned'
                         
 
 

@@ -234,7 +234,7 @@ class Rcon:
         command = args[1]
         print 'admin is %s and command is %s' % (admin.name, command)
         command = command.split()
-        print command
+        # print command
         if len(command) == 1:
             self.putMessage(None, settings.BOT_MESSAGE_STOP)
             time.sleep(1)
@@ -268,7 +268,7 @@ class Rcon:
                     settings.BOMBED_PLAYER = player
                     settings.BOMBER_ADMIN = admin
                     settings.BOMB_COLOR = choice(['RED', 'YELLOW', 'GREEN', 'FEAR'])
-                    print settings.BOMB_COLOR
+                    # print settings.BOMB_COLOR
                 else:
                     self.putMessage(admin.slot, "player doesn't exist or too many player")
             else:
@@ -780,43 +780,47 @@ class Rcon:
         diffblue = blue_numbers - red_numbers
 
         if red_numbers + blue_numbers < 2:
-            print "meno di 2 giocatori, niente da bilanciare"
+            pass
+            # print "meno di 2 giocatori, niente da bilanciare"
         elif red_numbers == blue_numbers:
-            print "numero giocatori uguale, niente da bilanciare"
+            pass
+            # print "numero giocatori uguale, niente da bilanciare"
         else:
             if diffred == 1:
                 if red_scores - blue_scores >= 2:
-                    print "punteggio red maggiore di 2, sposto il giocatore + scarso da red a blue"
+                    # print "punteggio red maggiore di 2, sposto il giocatore + scarso da red a blue"
                     self.score_balance(players, "RED", "BLUE")
                     self.b_balance = True
                 else:
-                    print "diffred == 1, differenza punteggio red->blue <= 2, niente da bilanciare"
+                    pass
+                    # print "diffred == 1, differenza punteggio red->blue <= 2, niente da bilanciare"
             elif diffblue == 1:
                 if blue_scores - red_scores >= 2:
-                    print "punteggio blue maggiore di 2, sposto il giocatore + scarso da blue a red"
+                    # print "punteggio blue maggiore di 2, sposto il giocatore + scarso da blue a red"
                     self.b_balance = True
                     self.score_balance(players, "BLUE", "RED")
                 else:
-                    print "diffblue == 1, differenza punteggio <= 2, niente da bilanciare"
+                    pass
+                    # print "diffblue == 1, differenza punteggio <= 2, niente da bilanciare"
             elif diffred > 0 and diffred % 2 == 0:
-                print "effettuo team balance sul team red"
+                # print "effettuo team balance sul team red"
                 self.b_balance = True
                 self.score_balance(players, "RED", "BLUE")
             elif diffblue > 0 and diffblue % 2 == 0:
-                print "effettuo team balance sul team blue"
+                # print "effettuo team balance sul team blue"
                 self.b_balance = True
                 self.score_balance(players, "BLUE", "RED")
             elif diffred > 0 and diffred % 2 != 0:
-                print "effettuo team balance sul team red"
+                # print "effettuo team balance sul team red"
                 self.b_balance = True
                 self.score_balance(players, "RED", "BLUE")
-                print "rivaluto altri spostamenti"
+                # print "rivaluto altri spostamenti"
                 self.balance()
             elif diffblue > 0 and diffblue % 2 != 0:
-                print "effettuo team balance sul team blue"
+                # print "effettuo team balance sul team blue"
                 self.b_balance = True
                 self.score_balance(players, "BLUE", "RED")
-                print "rivaluto altri spostamenti"
+                # print "rivaluto altri spostamenti"
                 self.balance()
 
 
@@ -1026,19 +1030,22 @@ class Rcon:
         if len(command) == 2:
             player_found, player_obj = self.getFullPlayer(command[1])
             if player_found:
-                geo_address = self.geocode.getInfoFromIP(player_obj.address.split(":")[0])
-                # print geo_address
-                city = str(geo_address['city'])
-                country = str(geo_address['country_name'])
-                
-                if city!="" and country!="":
-                    self.putMessage(admin.slot, "%s comes from %s (%s)" % (player_obj.name, city, country))
-                elif city!="" and country=="":
-                    self.putMessage(admin.slot, "%s comes from %s" % (player_obj.name, city))
-                elif city=="" and country!="":
-                    self.putMessage(admin.slot, "%s comes from %s" % (player_obj.name, country))
-                else:
-                    self.putMessage(admin.slot, "I don't know where player from")
+                try:
+                    geo_address = self.geocode.getInfoFromIP(player_obj.address.split(":")[0])
+                    # print geo_address
+                    city = str(geo_address['city'])
+                    country = str(geo_address['country_name'])
+                    
+                    if city!="" and country!="":
+                        self.putMessage(admin.slot, "%s comes from %s (%s)" % (player_obj.name, city, country))
+                    elif city!="" and country=="":
+                        self.putMessage(admin.slot, "%s comes from %s" % (player_obj.name, city))
+                    elif city=="" and country!="":
+                        self.putMessage(admin.slot, "%s comes from %s" % (player_obj.name, country))
+                    else:
+                        self.putMessage(admin.slot, "I don't know where player from")
+                except:
+                    self.putMessage(admin.slot, "Cannot locate this player")
             else:
                 self.putMessage(admin.slot, "player doesn't exist or too many player")
         else:
