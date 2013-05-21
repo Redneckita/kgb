@@ -137,8 +137,10 @@ class Evaluator:
                                 t = time.mktime(c)
                                 t = t + (int(ban['ban_minute'])*60)
                                 t = time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(t))
+                                print t
+                                print str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
                                 if t >= str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")):
-                                    print "tempban con scadenza %s per %s (%s). kick" % (t, player.name, player.guid)
+                                    print "tempban con scadenza %s per %s. kick" % (t, player.name, player.guid)
                                     self.rc.putMessage(player.slot, "You are ^1tempbanned!")                                     
                                     self.rc.putMessage(player.slot, "Reason: ^1" + str(ban['ban_reason']))
                                     time.sleep(1)
