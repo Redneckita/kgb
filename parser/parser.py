@@ -140,7 +140,7 @@ class Evaluator:
                                 print t
                                 print str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
                                 if t >= str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")):
-                                    print "tempban con scadenza %s per %s. kick" % (t, player.name, player.guid)
+                                    print "tempban con scadenza %s per %s (%s). kick" % (t, player.name, player.guid)
                                     self.rc.putMessage(player.slot, "You are ^1tempbanned!")                                     
                                     self.rc.putMessage(player.slot, "Reason: ^1" + str(ban['ban_reason']))
                                     time.sleep(1)
