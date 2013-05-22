@@ -46,7 +46,12 @@ class Main:
                 seconds += 1
                 if int(seconds) == int(settings.SPAM_MESSAGES_TIMEOUT) and len(settings.SPAM_MESSAGES)>0:
                     seconds = 0
-                    evaluator.put_spam()
+                    # check if server is closed
+                    a = quake.Administrator(opts.server_address, int(opts.server_port), opts.rcon_passwd.decode("base64", "strict"))
+                    g_passwd = a.getVariable("g_password")
+                    # if open do spam
+                    if g_passwd == "":
+                        evaluator.put_spam()
 
                 #check per reset g_password
                 check_seconds += 1

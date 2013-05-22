@@ -471,6 +471,23 @@ class Administrator(Server, Parser):
             raise ConnectionError(status.strip())
         return (status, data)
 
+    def getVariable(self, var):
+        s_var = self.rcon_command(var)
+        s_var = s_var[1].split()[1].replace("is:", "").replace("\"", "")
+        replacestrings = [
+            ("^1","")
+            ,("^2","")
+            ,("^3","")
+            ,("^4","")
+            ,("^5","")
+            ,("^6","")
+            ,("^7","")
+            ,(",","")
+        ]
+        for searchstring, replacestring in replacestrings:
+            s_var = s_var.replace(searchstring, replacestring)
+        return s_var              
+
 def PyQuake3(server, rcon_password=None, filter_colors=True):
     """
     Factory method for some backwards compatibility.
