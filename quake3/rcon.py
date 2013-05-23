@@ -84,7 +84,7 @@ class Rcon:
     def getPlayers(self):
         a = quake.Administrator(self.host_address, self.host_port, self.rcon_passwd)
         a.rcon_update()
-        # a.rcon_dumpuser_all()
+        a.rcon_dumpuser_all()
         return a.players                
 
     def evaluateGears(self):
