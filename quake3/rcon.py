@@ -62,7 +62,7 @@ class Rcon:
         if p_found:
             return True, a.rcon_dumpuser(p_slot)
         else:
-            return True, r_player
+            return None, False
 
     def getVariable(self, var):
         s_var = self.putCommand(var)
