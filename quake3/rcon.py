@@ -60,25 +60,9 @@ class Rcon:
         count = 0
         p_found, p_slot = self.getPlayerSlot(data)
         if p_found:
-            a.rcon_dumpuser(p_slot)
-            r_player = None
-            
-            try: data=int(data)
-            except: pass
-            if not isinstance(data, int):
-                for p in a.players:
-                    if p.name.lower().find(data.lower())!=-1:
-                       count += 1
-                       r_player =  p
-            else:
-                for p in a.players:
-                    if p.slot == data:
-                       count += 1
-                       r_player =  p
-            a.connection.close()
-        if count == 0 or count > 1:
-            return None, False
-        return True, r_player
+            return True, a.rcon_dumpuser(p_slot)
+        else:
+            return True, r_player
 
     def getVariable(self, var):
         s_var = self.putCommand(var)
