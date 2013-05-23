@@ -56,7 +56,7 @@ class Rcon:
     def getFullPlayer(self, data):
         a = quake.Administrator(self.host_address, self.host_port, self.rcon_passwd)
         a.rcon_update()
-        a.rcon_dumpuser_all()
+        # a.rcon_dumpuser_all()
         slot = -1
         count = 0
         r_player = None
