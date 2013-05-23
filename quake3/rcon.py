@@ -56,24 +56,26 @@ class Rcon:
     def getFullPlayer(self, data):
         a = quake.Administrator(self.host_address, self.host_port, self.rcon_passwd)
         a.rcon_update()
-        # a.rcon_dumpuser_all()
         slot = -1
         count = 0
-        r_player = None
-        
-        try: data=int(data)
-        except: pass
-        if not isinstance(data, int):
-            for p in a.players:
-                if p.name.lower().find(data.lower())!=-1:
-                   count += 1
-                   r_player =  p
-        else:
-            for p in a.players:
-                if p.slot == data:
-                   count += 1
-                   r_player =  p
-        a.connection.close()
+        p_found, p_slot = self.getPlayerSlot(data)
+        if p_found:
+            a.rcon_dumpuser(p_slot)
+            r_player = None
+            
+            try: data=int(data)
+            except: pass
+            if not isinstance(data, int):
+                for p in a.players:
+                    if p.name.lower().find(data.lower())!=-1:
+                       count += 1
+                       r_player =  p
+            else:
+                for p in a.players:
+                    if p.slot == data:
+                       count += 1
+                       r_player =  p
+            a.connection.close()
         if count == 0 or count > 1:
             return None, False
         return True, r_player
