@@ -191,5 +191,5 @@ class Evaluator:
                             self.rc.putMessage(player.slot, settings.MESSAGE_PERMISSION % (command_prop['min_level']))
                     else:
                         # 'no player'
-                                pass
+                        pass
             
