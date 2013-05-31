@@ -168,28 +168,29 @@ class Evaluator:
             # '\n'
             # 'verifico se mi e\' stato passato un comando'
             data = message.split()
-            for command, command_prop in settings.COMMANDS.items():
-                if data[0] == command_prop['command'] or data[0] == command_prop['command_slug']:
-                    # controllo se e' un comando escluso
-                    for exclude_command in settings.EXCLUDE_COMMANDS:
-                        if command_prop['command'] == str(exclude_command):
-                            return True
-                       
-                    # 'e\' un comando, verifico se il player ha i permessi'
-                    player = self.rc.getPlayer(res.group("id"))
-                    is_authorized = False
-                    if player and player.guid != '':
-                        player_found, player_obj = self.api.get_player(player.guid)
-                        if player_found:
-                            if player_obj['level'] >= command_prop['min_level']:
-                                is_authorized = True
+            if len(data)>0:
+                for command, command_prop in settings.COMMANDS.items():
+                    if data[0] == command_prop['command'] or data[0] == command_prop['command_slug']:
+                        # controllo se e' un comando escluso
+                        for exclude_command in settings.EXCLUDE_COMMANDS:
+                            if command_prop['command'] == str(exclude_command):
+                                return True
+                           
+                        # 'e\' un comando, verifico se il player ha i permessi'
+                        player = self.rc.getPlayer(res.group("id"))
+                        is_authorized = False
+                        if player and player.guid != '':
+                            player_found, player_obj = self.api.get_player(player.guid)
+                            if player_found:
+                                if player_obj['level'] >= command_prop['min_level']:
+                                    is_authorized = True
 
-                        if is_authorized:
-                            # 'e\' autorizzato ... perform command'
-                            getattr(self.rc, command_prop['function'])(player, message, player_obj)
+                            if is_authorized:
+                                # 'e\' autorizzato ... perform command'
+                                getattr(self.rc, command_prop['function'])(player, message, player_obj)
+                            else:
+                                self.rc.putMessage(player.slot, settings.MESSAGE_PERMISSION % (command_prop['min_level']))
                         else:
-                            self.rc.putMessage(player.slot, settings.MESSAGE_PERMISSION % (command_prop['min_level']))
-                    else:
-                        # 'no player'
-                        pass
+                            # 'no player'
+                            pass
             
