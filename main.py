@@ -85,12 +85,18 @@ class Main:
                             """
                             check for existing player and player info
                             """
-                            evaluator.evaluate_player(x)
+                            try:
+                                evaluator.evaluate_player(x)
+                            except:
+                                pass
                         elif x.find('say:')!=-1 or x.find('sayteam:')!=-1:
                             """
                             check for bot command
                             """
-                            evaluator.evaluate_command(x)
+                            try:
+                                evaluator.evaluate_command(x)
+                            except:
+                                pass
 
 
 if __name__=="__main__":
