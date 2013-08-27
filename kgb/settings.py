@@ -76,7 +76,7 @@ COMMANDS = {
     "kick": {
         "command": "!!kick",
         "command_slug": "!!k",
-        "min_level": 80,
+        "min_level": 60,
         "syntax": "syntax is !!kick <playername|id>",
         "description": "Kick a player from the server",
         "function": "kick"
