@@ -1,5 +1,0 @@
-*.pyc
-*.sh
-*.log
-.gitignore
-generate_html.py
