@@ -287,7 +287,7 @@ class Api:
                 return True, bans['objects']
         return True, None            
 
-    def insert_ban(self, player, ban_reason, ban_minute, is_permanent):
+    def insert_ban(self, player, ban_reason, ban_minute, is_permanent, admin):
 
         player_found, player_obj = self.get_player(player.guid)
         if player_found:
@@ -298,7 +298,8 @@ class Api:
                 'ban_minute': ban_minute,
                 'is_permanent': is_permanent,
                 "player": player_obj['resource_uri'], 
-                "owner": self.api_user_uri
+                "owner": self.api_user_uri,
+                "admin": admin
             }
 
             profile_data = json.dumps(profile_json)

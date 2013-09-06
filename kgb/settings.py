@@ -313,6 +313,14 @@ COMMANDS = {
         "description": "Locate a player at city level (if available, otherwise displays the Country)",
         "function": "locate"
     },               
+    "veto": {
+        "command": "!!veto",
+        "command_slug": "!!vt",
+        "min_level": 60,
+        "syntax": "syntax is !!veto",
+        "description": "cancel vote in progress",
+        "function": "veto"
+    },      
 }
 
 GEARS = [

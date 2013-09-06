@@ -124,6 +124,11 @@ class Rcon:
         received_command = data.split()
         
         for command, command_prop in settings.COMMANDS.items():
+            # for exclude_command in settings.EXCLUDE_COMMANDS:
+            #    # print exclude_command
+            #    # print command_prop['command']
+            #     if command_prop['command'] == str(exclude_command):
+            #         break
             if len(received_command) == 1 and int(admin_obj['level'])>=command_prop['min_level']:
                 self.putMessage(admin.slot, '%s (%s). %s' % (command_prop['command'], command_prop['command_slug'], command_prop['syntax']))
                 time.sleep(1)
@@ -969,7 +974,7 @@ class Rcon:
                 command[2] = int(command[2])
                 player_found, player_obj = self.getFullPlayer(command[1])
                 if player_found:
-                    ban_player = self.api.insert_ban(player_obj, command[3], command[2], 0) 
+                    ban_player = self.api.insert_ban(player_obj, command[3], command[2], 0, admin.name) 
                     if ban_player:
                         self.putMessage(None, "%s banned player %s for %d minutes (reason: %s)" % (admin.name, player_obj.name, int(command[2]), command[3]))
 
@@ -994,7 +999,7 @@ class Rcon:
             
             player_found, player_obj = self.getFullPlayer(command[1])
             if player_found:
-                ban_player = self.api.insert_ban(player_obj, command[2], 0, 1) 
+                ban_player = self.api.insert_ban(player_obj, command[2], 0, 1, admin.name) 
                 if ban_player:
                     self.putMessage(None, "%s permbanned player %s (reason: %s)" % (admin.name, player_obj.name, command[2]))
                     self.putCommand("kick %d" % player_obj.slot) 
@@ -1037,3 +1042,15 @@ class Rcon:
         else:
             help_command = '!!help %s' % command[0].replace('!!', '')
             self.help(args[0], help_command, args[2])
+
+    def veto(self, *args, **kwargs):
+        
+        admin = args[0]
+        command = args[1]
+        print 'admin is %s and command is %s' % (admin.name, command)
+        command = command.split()
+        if len(command) == 1:
+            self.putCommand('veto')
+        else:
+            help_command = '!!help %s' % command[0].replace('!!', '')
+            self.help(args[0], help_command, args[2])                
