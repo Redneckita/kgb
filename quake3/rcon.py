@@ -91,7 +91,7 @@ class Rcon:
         gearCounter = math.pow(2,len(settings.GEARS))-1
 
         for i in range(0,len(settings.GEARS)):
-            if settings.GEARS[i][2]:
+            if not settings.GEARS[i][2]:
                 gearCounter -= settings.GEARS[i][1]
         return gearCounter
 
