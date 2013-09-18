@@ -1,7 +1,5 @@
 import math, re
 
-
-
 GEARS = [
   ['nade', 1, True]
   ,['snipers',2,True]

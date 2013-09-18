@@ -324,18 +324,18 @@ COMMANDS = {
 }
 
 GEARS = [
-  ['nade', 1, True]
-  ,['snipers',2,True]
-  ,['spas',4,True]
-  ,['pistols',8,True]
-  ,['automatic',16,True]
-  ,['negev',32,True]
+  ['nade', 1, True, 'na']
+  ,['snipers',2,True, 'sn']
+  ,['spas',4,True, 'sp']
+  ,['pistols',8,True, 'pi']
+  ,['automatic',16,True, 'au']
+  ,['negev',32,True, 'ne']
 
-  ,['na', 1, True]
-  ,['sn',2,True]
-  ,['sp',4,True]
-  ,['pi',8,True]
-  ,['au',16,True]
-  ,['ne',32,True]  
+  # ,['na', 1, True]
+  # ,['sn',2,True]
+  # ,['sp',4,True]
+  # ,['pi',8,True]
+  # ,['au',16,True]
+  # ,['ne',32,True]  
 ]
 
