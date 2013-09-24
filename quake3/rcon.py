@@ -649,6 +649,7 @@ class Rcon:
         if len(command) == 1:
             if settings.SERVER_CLOSED != 'YES':
                 passwd = random.randint(1000,9999)
+                self.putCommand('g_matchmode 1')
                 self.putCommand('g_password "%d"' % passwd)
                 self.putMessage(admin.slot, "The server is now protected with password: ^1%s. Please type !!reload to force password" % str(passwd))
                 time.sleep(1)
@@ -668,7 +669,9 @@ class Rcon:
         print 'admin is %s and command is %s' % (admin.name, command)
         command = command.split()
         if len(command) == 1:
+            self.putCommand('g_matchmode 0')
             self.putCommand('g_password ""')
+            self.putCommand('reload')
             self.putMessage(admin.slot, "The server is now without password")
         else:
             help_command = '!!help %s' % command[0].replace('!!', '')
