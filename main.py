@@ -61,7 +61,7 @@ class Main:
                     a.rcon_update()
                     players = a.players
                     if len(players) == 0:
-                        self.putCommand('g_needpass 0')
+                        a.rcon_command('g_needpass 0')
                         a.rcon_command('g_password ""')
                         a.rcon_command('g_matchmode 0')
                         a.rcon_command('reload')
