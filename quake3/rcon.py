@@ -581,7 +581,7 @@ class Rcon:
                         else:
                             settings.GEARS[i][2] = False
                 # gear = self.evaluateGears()
-                self.putCommand("g_gear %s" % ''.join([x[1] for x in GEARS if x[2]]))
+                self.putCommand("g_gear %s" % ''.join([x[1] for x in settings.GEARS if x[2]]))
         else:
             help_command = '!!help %s' % command[0].replace('!!', '')
             self.help(args[0], help_command, args[2])  
