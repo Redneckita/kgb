@@ -87,14 +87,14 @@ class Rcon:
         a.rcon_dumpuser_all()
         return a.players                
 
-    def evaluateGears(self):
-        gearCounter = math.pow(2,len(settings.GEARS))-1
-        print gearCounter
+    # def evaluateGears(self):
+    #     gearCounter = math.pow(2,len(settings.GEARS))-1
+    #     print gearCounter
 
-        for i in range(0,len(settings.GEARS)):
-            if settings.GEARS[i][2]:
-                gearCounter -= settings.GEARS[i][1]
-        return gearCounter
+    #     for i in range(0,len(settings.GEARS)):
+    #         if settings.GEARS[i][2]:
+    #             gearCounter -= settings.GEARS[i][1]
+    #     return gearCounter
 
 
     def putCommand(self, data):
@@ -557,8 +557,8 @@ class Rcon:
         print 'admin is %s and command is %s' % (admin.name, command)
         command = command.split()
         if len(command) == 2:
-            if command[1].lower() not in ["+nade", "-nade", "+snipers", "-snipers", "+spas", "-spas", "+pistols", "-pistols", "+automatic", "-automatic", "+negev", "-negev", "all", "none"]:
-                self.putMessage(admin.slot, "available parameters are: +/-nade||+/-snipers||+/-spas|+/-pistols|+/-automatic|+/-negev|all|none")
+            if command[1].lower() not in ['+' + x[0] for x in settings.GEARS] and command[1].lower() not in ['-' + x[0] for x in settings.GEARS] and command[1].lower() not in ['none', 'all']:
+                self.putMessage(admin.slot, "available parameters are: +/- " + ['+/- ' + x[0] for x in settings.GEARS] + " or none or all")
             else:
                 param = ""
                 value = ""
@@ -580,8 +580,8 @@ class Rcon:
                             settings.GEARS[i][2] = True
                         else:
                             settings.GEARS[i][2] = False
-                gear = self.evaluateGears()
-                self.putCommand("g_gear %d" % int(gear))
+                # gear = self.evaluateGears()
+                self.putCommand("g_gear %s" % ''.join([x[1] for x in GEARS if x[2]]))
         else:
             help_command = '!!help %s' % command[0].replace('!!', '')
             self.help(args[0], help_command, args[2])  
