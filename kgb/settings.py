@@ -234,7 +234,7 @@ COMMANDS = {
         "command": "!!weap",
         "command_slug": "!!wp",
         "min_level": 60,
-        "syntax": "syntax is !!weap +/- " + ' '.join(x[0] fot x in GEARS) + ' or none/all' ,
+        "syntax": "syntax is !!weap +/- " + ' '.join(x[0] for x in GEARS) + ' or none/all' ,
         "description": "Weapon limiter, useful to set up a game for restricted weapons usage (i.e.: Pistols and nades only)",
         "function": "weap"
     },                 
