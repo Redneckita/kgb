@@ -557,7 +557,7 @@ class Rcon:
         print 'admin is %s and command is %s' % (admin.name, command)
         command = command.split()
         if len(command) == 2:
-            if command[1].lower() not in ['+' + x[0] for x in settings.GEARS] and command[1].lower() not in ['-' + x[0] for x in settings.GEARS] and command[1].lower() not in ['none', 'all']:
+            if command[1].lower().replace('+', '').replace('-','') not in [x[0] for x in settings.GEARS] and command[1].lower() not in ['none', 'all'] and not command[1].startswith("+") and command[1].startswith("-"):
                 self.putMessage(admin.slot, "available parameters are: +/- " + ['+/- ' + x[0] for x in settings.GEARS] + " or none or all")
             else:
                 param = ""

@@ -13,4 +13,4 @@ GEARS = [
 
 
 
-print ''.join([x[1] for x in GEARS if x[2]])
+print '+' + [x[0] for x in GEARS]
