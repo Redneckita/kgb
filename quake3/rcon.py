@@ -558,7 +558,7 @@ class Rcon:
         command = command.split()
         if len(command) == 2:
             if (command[1].lower().replace('+', '').replace('-','') not in [x[0] for x in settings.GEARS] and not command[1].startswith("+") and command[1].startswith("-")) and command[1].lower() not in ['none', 'all']:
-                self.putMessage(admin.slot, "available parameters are: +/- " + ''.join([x[0] for x in settings.GEARS]) + " or none or all")
+                self.putMessage(admin.slot, "available parameters are: +/- " + ' '.join([x[0] for x in settings.GEARS]) + " or none or all")
             else:
                 param = ""
                 value = ""
