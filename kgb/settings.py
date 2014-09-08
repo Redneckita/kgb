@@ -323,19 +323,33 @@ COMMANDS = {
     },      
 }
 
-GEARS = [
-  ['nade', 1, True, 'na']
-  ,['snipers',2,True, 'sn']
-  ,['spas',4,True, 'sp']
-  ,['pistols',8,True, 'pi']
-  ,['automatic',16,True, 'au']
-  ,['negev',32,True, 'ne']
+# GEARS = [
+#   ['nade', 1, True, 'na']
+#   ,['snipers',2,True, 'sn']
+#   ,['spas',4,True, 'sp']
+#   ,['pistols',8,True, 'pi']
+#   ,['automatic',16,True, 'au']
+#   ,['negev',32,True, 'ne']
 
-  # ,['na', 1, True]
-  # ,['sn',2,True]
-  # ,['sp',4,True]
-  # ,['pi',8,True]
-  # ,['au',16,True]
-  # ,['ne',32,True]  
+#   # ,['na', 1, True]
+#   # ,['sn',2,True]
+#   # ,['sp',4,True]
+#   # ,['pi',8,True]
+#   # ,['au',16,True]
+#   # ,['ne',32,True]  
+# ]
+
+
+GEARS = [
+    ['pistols', 'FGfg', True]
+    ,['smg', 'IJh', True]
+    ,['autos', 'LMae', True]
+    ,['spas', 'H', True]
+    ,['negev', 'c', True]
+    ,['snipers', 'NZ', True]
+    ,['nades', 'OQK', True]
+    ,['armor', 'RW', True]
+    ,['attachments', 'UV', True]
+    ,['extras', 'XTS', True]
 ]
 
