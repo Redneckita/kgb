@@ -13,4 +13,4 @@ GEARS = [
 
 
 
-print '+' + [x[0] for x in GEARS]
+print "available parameters are: +/- " + ' '.join([x[0] for x in GEARS]) + " or none or all"
