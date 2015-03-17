@@ -1060,3 +1060,27 @@ class Rcon:
         else:
             help_command = '!!help %s' % command[0].replace('!!', '')
             self.help(args[0], help_command, args[2])                
+
+    def randmap(self, *args, **kwargs):
+        
+        admin = args[0]
+        command = args[1]
+        print 'admin is %s and command is %s' % (admin.name, command)
+        command = command.split()
+        if len(command) == 1:
+        
+            cmaps = self.putCommand("dir map bsp")
+           
+            s_map = ""
+            for maps in cmaps:
+                if maps != "print":
+                    maps = maps.split()
+                    map = random.choice(maps)
+                    s_map = map.replace("/", "").replace(".bsp", "")
+                    self.putMessage(None, "Changing map to ^2%s" % s_map)
+                    time.sleep(1)
+                    self.putCommand('map %s' % s_map
+
+        else:
+            help_command = '!!help %s' % command[0].replace('!!', '')
+            self.help(args[0], help_command, args[2])                  

@@ -333,7 +333,15 @@ COMMANDS = {
         "syntax": "syntax is !!veto",
         "description": "cancel vote in progress",
         "function": "veto"
-    },      
+    },   
+    "randmap": {
+        "command": "!!randmap",
+        "command_slug": "!!rm",
+        "min_level": 60,
+        "syntax": "syntax is !!randmap",
+        "description": "Cycle to a random map",
+        "function": "randmap"
+    },        
 }
 
 
