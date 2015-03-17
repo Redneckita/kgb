@@ -855,12 +855,14 @@ class Rcon:
                     self.putBigMessage("%sActivating Team Death Jump, please save your position now!!! %s" % (color,seconds))
                     seconds -= 1
                     time.sleep(1)
-                self.putCommand('g_respawnprotection 0')
-                self.putCommand('g_gear 0')
+                # self.putCommand('g_respawnprotection 0')
+                # self.putCommand('g_gear 0')
+                self.putCommand('g_gametype 3')
+                self.weap(admin, 'all')
                 self.putCommand('sv_allowLoadPosition 0')
                 self.putCommand('sv_regainStamina 0')
                 self.putCommand('bigtext "^1Team Death Jump Activated, ENJOY!!!"')
-                self.putCommand('restart')
+                self.putCommand('reload')
             elif command[1].lower() == 'off':
                 seconds = 10
                 pseconds = 0
@@ -874,12 +876,14 @@ class Rcon:
                     self.putBigMessage("%sDeactivating Team Death Jump!!! %s" % (color,seconds))
                     seconds -= 1
                     time.sleep(1)
-                self.putCommand('g_respawnprotection 9999999')
-                self.putCommand('g_gear 63')
+                # self.putCommand('g_respawnprotection 9999999')
+                # self.putCommand('g_gear 63')
+                self.putCommand('g_gametype 9')
+                self.weap(admin, 'none')
                 self.putCommand('sv_allowLoadPosition 1')
                 self.putCommand('sv_regainStamina 1')
                 self.putCommand('bigtext "^1Team Death Jump Deactivated, ENJOY!!!"')
-                self.putCommand('restart')
+                self.putCommand('reload')
             else:
                 self.putMessage(admin.slot, "available parameters are: on|off")                  
         else:
