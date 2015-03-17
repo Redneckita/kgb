@@ -1079,8 +1079,7 @@ class Rcon:
                     s_map = map.replace("/", "").replace(".bsp", "")
                     self.putMessage(None, "Changing map to ^2%s" % s_map)
                     time.sleep(1)
-                    self.putCommand('map %s' % s_map
-
+                    self.putCommand('map %s' % s_map)
         else:
             help_command = '!!help %s' % command[0].replace('!!', '')
             self.help(args[0], help_command, args[2])                  
