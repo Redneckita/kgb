@@ -1074,19 +1074,18 @@ class Rcon:
         print 'admin is %s and command is %s' % (admin.name, command)
         command = command.split()
         if len(command) == 1:
+          
+            dir_maps = self.putCommand("dir map bsp")
+            maps = re.findall("(\w+)(\.bsp)", dir_maps[1])
         
-            cmaps = self.putCommand("dir map bsp")
-           
-            s_map = ""
-            for maps in cmaps:
-                if maps != "print":
-                    maps = maps.split()
-                    map = random.choice(maps)
-                    s_map = map.replace("/", "").replace(".bsp", "")
-                    self.putMessage(None, "Changing map to ^2%s" % s_map)
-                    time.sleep(1)
-                    self.putCommand('g_nextmap %s' % s_map)
-                    self.putCommand('cyclemap')
+            t_maps = [map[0] for map in maps]
+            s_map = choice(t_maps)
+
+            self.putMessage(None, "Changing map to ^2%s" % s_map)
+            time.sleep(1)
+            self.putCommand('g_nextmap %s' % s_map)
+            self.putCommand('cyclemap')
+
         else:
             help_command = '!!help %s' % command[0].replace('!!', '')
             self.help(args[0], help_command, args[2])                  
