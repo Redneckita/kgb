@@ -6,6 +6,7 @@ from kgb import settings as settings
 from quake3 import rcon
 from database import api
 from random import choice
+import threading
 
 class Parser:
 
@@ -187,10 +188,15 @@ class Evaluator:
 
                             if is_authorized:
                                 # 'e\' autorizzato ... perform command'
-                                getattr(self.rc, command_prop['function'])(player, message, player_obj)
+                                t = threading.Thread(target=do_threaded_stuff, args=(self.rc, command_prop['function'], player, message, player_obj) )
+                                t.start()                                
                             else:
                                 self.rc.putMessage(player.slot, settings.MESSAGE_PERMISSION % (command_prop['min_level']))
                         else:
                             # 'no player'
                             pass
+
+
+def do_threaded_stuff(self, rc, func, arg1, arg2, arg3):
+    getattr(rc, func)(arg1, arg2, arg3)                            
             
