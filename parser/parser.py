@@ -43,6 +43,7 @@ class Evaluator:
         self.api_user = api_user
         self.api_key = api_key
         self.api = api.Api(api_user, api_key, api_url)
+        self.threads = {}
 
     def evaluate_config(self):
         server_config_found, server_config_objs = self.api.get_server_configs()
@@ -188,8 +189,13 @@ class Evaluator:
 
                             if is_authorized:
                                 # 'e\' autorizzato ... perform command'
-                                t = threading.Thread(target=do_threaded_stuff, args=(self.rc, command_prop['function'], player, message, player_obj) )
-                                t.start()                                
+                                try:
+                                    lth = self.threads[player.slot]
+                                    self.rc.putMessage(player.slot, 'Wait sir, you already have a running command')
+                                except KeyError:
+                                    t = threading.Thread(target=self.do_threaded_stuff, args=(self.rc, command_prop['function'], player, message, player_obj) )
+                                    t.start()   
+                                    self.threads[player.slot] =  t                           
                             else:
                                 self.rc.putMessage(player.slot, settings.MESSAGE_PERMISSION % (command_prop['min_level']))
                         else:
@@ -197,6 +203,10 @@ class Evaluator:
                             pass
 
 
-def do_threaded_stuff(self, rc, func, arg1, arg2, arg3):
-    getattr(rc, func)(arg1, arg2, arg3)                            
+    def do_threaded_stuff(self, rc, func, arg1, arg2, arg3):
+        getattr(rc, func)(arg1, arg2, arg3) 
+        try:
+            del self.threads[arg1.slot]                           
+        except:
+            pass
             
