@@ -191,7 +191,8 @@ class Evaluator:
                                 # 'e\' autorizzato ... perform command'
                                 try:
                                     lth = self.threads[player.slot]
-                                    self.rc.putMessage(player.slot, 'Wait sir, you already have a running command')
+                                    if lth is not None:
+                                        self.rc.putMessage(player.slot, 'Wait sir, you already have a running command')
                                 except KeyError:
                                     t = threading.Thread(target=self.do_threaded_stuff, args=(self.rc, command_prop['function'], player, message, player_obj) )
                                     t.start()   
@@ -204,9 +205,7 @@ class Evaluator:
 
 
     def do_threaded_stuff(self, rc, func, arg1, arg2, arg3):
-        getattr(rc, func)(arg1, arg2, arg3) 
-        try:
-            del self.threads[arg1.slot]                           
-        except:
-            pass
+        global self.threads
+        getattr(rc, func)(arg1, arg2, arg3)
+        del self.threads[arg1.slot]      
             

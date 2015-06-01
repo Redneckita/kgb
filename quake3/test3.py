@@ -1,45 +1,34 @@
 import threading
 import time
 
-
-def do_stuff(self, *args):
-
-    getattr(rc, 'print2')('player', 'message', 'player_obj')
-    time.sleep(5)
-    print 'esco da thread'
-
-
-
-
 class Rcon:
-	
-    def print2(self, *args):
-        
-        # print args[0], args[1], args[2]
-        pass
+    
+    def __init__(self):
+        self.threads = {}
+
+    def do_stuff(self, *args):
+        try:
+            lth = self.threads['123']
+            if lth is not None:
+                print 'thread exists: ', lth
+        except KeyError:
+            t = threading.Thread(target=self.do_threaded_stuff)
+            t.start()   
+            # self.threads['123'] =  t   
+
+
+    def do_threaded_stuff(self):
+        print 'entrato nel thread'
+        try:
+            print 'provo a cancellare'
+            del self.threads['123']
+            print 'cancellato'
+        except KeyError:
+            print 'non esiste'
 
 
 
 
 
-
-threads = {}
-
-rc = Rcon()    
-t = threading.Thread(target=do_stuff, args=(rc, 'print2',))
-t.start()
-
-threads['123'] = t
-
-print threads['123']
-
-time.sleep(10)
-
-lt = threads['123']
-
-if lt.isAlive:
-	print 'vivo'
-else:
-	print 'morto'
-
-
+r = Rcon()
+r.do_stuff()        
