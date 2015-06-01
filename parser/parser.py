@@ -8,6 +8,9 @@ from database import api
 from random import choice
 import threading
 
+
+threads = {}
+
 class Parser:
 
     def __init__(self, log_file):
@@ -190,13 +193,13 @@ class Evaluator:
                             if is_authorized:
                                 # 'e\' autorizzato ... perform command'
                                 try:
-                                    lth = self.threads[player.slot]
+                                    lth = threads[player.slot]
                                     if lth is not None:
-                                        self.rc.putMessage(player.slot, 'Wait sir, you already have a running command')
+                                        self.rc.putMessage(player.slot, '^1Wait sir, you already have a running command')
                                 except KeyError:
                                     t = threading.Thread(target=self.do_threaded_stuff, args=(self.rc, command_prop['function'], player, message, player_obj) )
                                     t.start()   
-                                    self.threads[player.slot] =  t                           
+                                    threads[player.slot] =  t                           
                             else:
                                 self.rc.putMessage(player.slot, settings.MESSAGE_PERMISSION % (command_prop['min_level']))
                         else:
@@ -205,7 +208,7 @@ class Evaluator:
 
 
     def do_threaded_stuff(self, rc, func, arg1, arg2, arg3):
-        global self.threads
+        global threads
         getattr(rc, func)(arg1, arg2, arg3)
-        del self.threads[arg1.slot]      
+        del threads[arg1.slot]      
             
