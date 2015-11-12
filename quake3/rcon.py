@@ -860,8 +860,8 @@ class Rcon:
                 self.putCommand('g_gametype 3')
                 # self.weap(admin.slot, 'all')
                 self.putCommand('g_gear ""')
-                self.putCommand('sv_allowLoadPosition 0')
-                self.putCommand('sv_regainStamina 0')
+                self.putCommand('g_allowPosSaving 0')
+                self.putCommand('g_stamina 0')
                 self.putCommand('bigtext "^1Team Death Jump Activated, ENJOY!!!"')
                 self.putCommand('reload')
             elif command[1].lower() == 'off':
@@ -882,8 +882,8 @@ class Rcon:
                 self.putCommand('g_gametype 9')
                 # self.weap(admin.slot, 'none')
                 self.putCommand('g_gear "FGHIJKLMNZacefghOQRSTUVWX"')
-                self.putCommand('sv_allowLoadPosition 1')
-                self.putCommand('sv_regainStamina 1')
+                self.putCommand('g_allowPosSaving 1')
+                self.putCommand('g_stamina 1')
                 self.putCommand('bigtext "^1Team Death Jump Deactivated, ENJOY!!!"')
                 self.putCommand('reload')
             else:
